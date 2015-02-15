@@ -1,0 +1,71 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_centerInParent="true"
+    tools:context=".MainActivity$MainFragment">
+
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/button_start"
+        android:layout_width="128dip"
+        android:layout_height="128dip"
+        android:src="@drawable/play"
+        android:layout_gravity="center_horizontal"
+        app:cb_color="#99CC00"
+        app:cb_pressedRingWidth="8dip" />
+
+
+    <TextView
+        android:id="@+id/text_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/button_start"
+        android:paddingTop="45dp"
+        />
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/button_stop"
+        android:layout_width="128dip"
+        android:layout_height="128dip"
+        android:src="@drawable/stop"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/button_start"
+        app:cb_color="#99CC00"
+        app:cb_pressedRingWidth="8dip" />
+
+    <TextView
+        android:id="@+id/text_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/button_stop"
+        android:layout_below="@+id/button_start"
+        android:paddingTop="45dp"
+        />
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/button_save"
+        android:layout_width="128dip"
+        android:layout_height="128dip"
+        android:src="@drawable/save"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/button_stop"
+        app:cb_color="#99CC00"
+        app:cb_pressedRingWidth="8dip" />
+
+    <TextView
+        android:id="@+id/text_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/button_save"
+        android:layout_below="@+id/button_stop"
+        android:paddingTop="45dp"
+        />
+
+</RelativeLayout>

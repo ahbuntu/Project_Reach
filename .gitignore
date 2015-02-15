@@ -17,6 +17,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Project Specific Directories
+signing_key/
 # =========================
 # Operating System Files
 # =========================
