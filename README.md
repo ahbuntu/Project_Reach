@@ -7,6 +7,7 @@ The benefits of smart phones with large screens drive their popularity. However,
 
 
 <b>Website
+
 Folder to store files - 
 - res/docs/
 
@@ -17,6 +18,7 @@ Naming convention to follow -
 - final_report.pdf
 
 <b>GripRecognition
+
 Created a quick and dirty logging application that spits out the sensor values (accel and rotation) from the phone.
 An APK file to install is in MyApplication/app/build/outputs/apk/app-release-unaligned.apk
 
