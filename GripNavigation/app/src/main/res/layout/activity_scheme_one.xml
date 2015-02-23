@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0099cc"
+    android:id="@+id/layout_scheme_one">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="25dip"
+        android:id="@+id/imageView"
+        android:src="@drawable/navigation_bar"
+        android:scaleType="fitXY"/>
+
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchView"
+        />
+
+    <Button android:id="@+id/dummy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dummy_button"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="400dip"/>
+
+    <!--style="?metaButtonBarButtonStyle"-->
+
+</LinearLayout>
