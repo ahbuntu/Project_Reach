@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 public class SchemeOneActivity extends Activity {
 
     LinearLayout layoutUI;
-    Button btn;
-
+    private static int SLIDE_DISTANCE = 600;
+    private static int ANIM_DURATION = 1000;
     /**
      * Called when the activity is first created.
      * */
@@ -33,11 +33,9 @@ public class SchemeOneActivity extends Activity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 layoutUI = (LinearLayout) (findViewById(R.id.layout_scheme_one));
-
                 SlidingLayout layoutAnim = new SlidingLayout(layoutUI);
-                layoutAnim.setDuration(1000);
+                layoutAnim.setDuration(ANIM_DURATION);
                 layoutUI.startAnimation(layoutAnim);
             }
         });
@@ -45,7 +43,11 @@ public class SchemeOneActivity extends Activity {
 
     class SlidingLayout extends Animation
     {
-        private int startHeight;
+        private int mViewHeight;
+        private int mViewWidth;
+        private int mParentHeight;
+        private int mParentWidth;
+
         private int deltaHeight; // distance between start and end height
         private View mView;
 
@@ -59,7 +61,7 @@ public class SchemeOneActivity extends Activity {
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
 //            layoutParams.setMargins(0, 100, 0, 0);
-            layoutParams.topMargin = (int)(300 * interpolatedTime);
+            layoutParams.topMargin = (int)(SLIDE_DISTANCE * interpolatedTime);
             mView.setLayoutParams(layoutParams);
 //            mView.getLayoutParams().height = (int) (600 * interpolatedTime);
 

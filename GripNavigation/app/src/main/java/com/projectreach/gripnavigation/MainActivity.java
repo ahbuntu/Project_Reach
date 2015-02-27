@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.apache.http.conn.scheme.Scheme;
+
 
 public class MainActivity extends Activity {
 
@@ -31,7 +33,8 @@ public class MainActivity extends Activity {
         button_Scheme2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Not implemented yet.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SchemeTwoActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -18,9 +18,14 @@
         </activity>
         <activity
             android:name=".SchemeOneActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-            <!--android:label="@string/title_activity_ui__scheme_one"-->
-            <!--android:theme="@style/FullscreenTheme" -->
+            android:configChanges="orientation|keyboardHidden|screenSize" >
+
+            <!-- android:label="@string/title_activity_ui__scheme_one" -->
+            <!-- android:theme="@style/FullscreenTheme" -->
+        </activity>
+        <activity
+            android:name=".SchemeTwoActivity"
+            android:label="@string/title_activity_scheme_two" >
         </activity>
     </application>
 
