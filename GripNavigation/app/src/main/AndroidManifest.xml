@@ -27,6 +27,11 @@
             android:name=".SchemeTwoActivity"
             android:label="@string/title_activity_scheme_two" >
         </activity>
+        <service
+            android:name=".SensorReader"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

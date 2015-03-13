@@ -1,9 +1,18 @@
 package com.projectreach.gripnavigation;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+import android.os.Parcelable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,8 +21,35 @@ import android.widget.Toast;
 
 import org.apache.http.conn.scheme.Scheme;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends Activity {
+
+    private static final String TAG = "MainActivity";
+
+    //pointer to my service
+    private SensorReader  mBoundService;
+    private boolean mIsBound = false;
+
+    private ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d(TAG, "onServiceConnected called");
+            //cast generic IBinder interface to my service interface and get reference to my service
+            mBoundService = ((SensorReader.MySensorReaderBinder)service).getService();
+            mIsBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.d(TAG, "onServiceDisconnected called");
+            mBoundService = null;
+            mIsBound = false;
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +73,54 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        Button button_startService = (Button) findViewById(R.id.button_start_service);
+        button_startService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startSensing();
+            }
+        });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter mIntentFilter = new IntentFilter(Constants.BROADCAST_ACTION);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, mIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
+    }
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG,"BroadcastReceiver onReceive called");
+            //TODO: do something useful with the received value
+            List<WindowBuffer> values = getIntent().getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
+        }
+    };
+
+    /**
+     * starts the service to log sensor data
+     */
+    private void startSensing() {
+        if (!mIsBound) {
+            Intent intent = new Intent(this, SensorReader.class);
+            Log.d("TWT", "i'mehre");
+            //TODO: need to pass windowsize in a bundle
+            bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+            mIsBound = true;
+//            dataSet = new ArrayList<String>();
+//            setStartText();
+        }
+    }
+
+    //region OptionsMenu implementation
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,4 +143,8 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //endregion
+
+
 }
