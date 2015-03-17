@@ -1,6 +1,7 @@
 package com.projectreach.gripnavigation;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -81,6 +82,27 @@ public class MainActivity extends Activity {
                 startSensing();
             }
         });
+
+
+        Button button_start_rfduino = (Button) findViewById(R.id.button_start_rfduino);
+        button_start_rfduino.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(MainActivity.this, RFduinoActivity.class);
+                startActivity(mIntent);
+            }
+        });
+
+
+        Button button_stop_rfduino = (Button) findViewById(R.id.button_stop_rfduino);
+        button_stop_rfduino.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rfduinoIntent = new Intent(MainActivity.this, RFduinoService.class);
+                stopService(rfduinoIntent);
+            }
+        });
+
     }
 
     @Override
