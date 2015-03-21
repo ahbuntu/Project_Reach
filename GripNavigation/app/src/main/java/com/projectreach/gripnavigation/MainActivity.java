@@ -133,8 +133,7 @@ public class MainActivity extends Activity {
     private void startSensing() {
         if (!mIsBound) {
             Intent intent = new Intent(this, SensorReader.class);
-            Log.d("TWT", "i'mehre");
-            //TODO: need to pass windowsize in a bundle
+            intent.putExtra("windowsize", 20); //pass windowsize in a bundle
             bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
             mIsBound = true;
 //            dataSet = new ArrayList<String>();
