@@ -7,4 +7,8 @@ public class Constants {
     public static final String BROADCAST_ACTION = "com.projectreach.gripnavigation.SENSOR_BROADCAST";
     public static final String ARG_SENSOR_VAL = "SENSOR_VALUES";
 
+    public enum Grip_Pattern {
+        NONE, GRIP, REACH
+    }
+
 }

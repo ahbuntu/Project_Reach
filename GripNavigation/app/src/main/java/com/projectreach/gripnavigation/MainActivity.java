@@ -34,6 +34,9 @@ public class MainActivity extends Activity {
     private SensorReader  mBoundService;
     private boolean mIsBound = false;
 
+    private int logOutBufferSize = 100 ;
+    private List<WindowBuffer> logOutBuffer = new ArrayList<>(logOutBufferSize * 16);
+
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -118,12 +121,19 @@ public class MainActivity extends Activity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
     }
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private  BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG,"BroadcastReceiver onReceive called");
             //TODO: do something useful with the received value
-            List<WindowBuffer> values = getIntent().getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
+
+            //each list item corresponds to a sampling of 20 values for a single sensor value
+            //expecting that size of values will always be 15
+            List<WindowBuffer> values = intent.getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
+
+            //log to file
+            LogOutputWriter outputLogger = new LogOutputWriter(MainActivity.this, 3);
+            outputLogger.execute(values);
         }
     };
 
@@ -136,8 +146,6 @@ public class MainActivity extends Activity {
             intent.putExtra("windowsize", 20); //pass windowsize in a bundle
             bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
             mIsBound = true;
-//            dataSet = new ArrayList<String>();
-//            setStartText();
         }
     }
 

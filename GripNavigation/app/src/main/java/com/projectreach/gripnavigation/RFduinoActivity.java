@@ -109,6 +109,7 @@ public class RFduinoActivity extends Activity implements BluetoothAdapter.LeScan
 //                addData(intent.getByteArrayExtra(RFduinoService.EXTRA_DATA));
                 ByteBuffer buffer = ByteBuffer.wrap(intent.getByteArrayExtra(RFduinoService.EXTRA_DATA)).order(ByteOrder.LITTLE_ENDIAN);
                 float val = buffer.getFloat();
+                Log.d(TAG, String.valueOf(intent.getByteArrayExtra(RFduinoService.EXTRA_DATA)));
                 Log.d(TAG, String.valueOf(val));
             }
         }

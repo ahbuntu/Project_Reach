@@ -34,6 +34,9 @@ public class SensorReader extends Service
     private int counter = 0;
 
     private List<WindowBuffer> sensorData = new ArrayList<WindowBuffer>();
+    private int BROADCAST_AXIS_SIZE = 3; //TODO: corresponds to number of axis - make this part of constructor
+    private int broadcastCounter = 0;
+
     private int windowSize = 5;
     private Queue<Float> x_buffQueue = null;
     private Queue<Float> y_buffQueue = null;
@@ -109,7 +112,7 @@ public class SensorReader extends Service
         Intent intent = new Intent();
         intent.setAction(Constants.BROADCAST_ACTION);
         intent.putParcelableArrayListExtra(Constants.ARG_SENSOR_VAL, (ArrayList<WindowBuffer>) sensorData);
-        sendBroadcast(intent);
+//        sendBroadcast(intent);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 //            Log.d(TAG, "Broadcast sent");
     }
@@ -120,10 +123,14 @@ public class SensorReader extends Service
 //            Log.d(TAG, "running in the background");
 
             SensorEvent event = events[0];
+
             if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
                 x_buffQueue = readAccelerationByAxis(event.values[0], x_buffQueue);
                 y_buffQueue = readAccelerationByAxis(event.values[1], y_buffQueue);
                 z_buffQueue = readAccelerationByAxis(event.values[2], z_buffQueue);
+            }
+            if (broadcastCounter == BROADCAST_AXIS_SIZE) {
+                readyToBroadcast();
             }
 //            if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
 //                String[] sensorDataRotRows =  readRotation(event);
@@ -153,7 +160,8 @@ public class SensorReader extends Service
                     mBuffer.add(buffVal);
                 }
                 sensorData.add(mBuffer);
-                readyToBroadcast();
+                broadcastCounter++;
+//                readyToBroadcast();
                 bufferQ.remove(); //remove the first/oldest element
             }
 
