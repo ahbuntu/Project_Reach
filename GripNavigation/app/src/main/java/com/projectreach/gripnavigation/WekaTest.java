@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -31,10 +32,15 @@ public class WekaTest extends ActionBarActivity
     private static final String TAG = "WekaTest";
     private static final String WEKA_DIRECTORY = "GripNavigation_Weka";
 
+
+    private TextView crossSummary;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weka_test);
+
+        crossSummary = (TextView) findViewById(R.id.text_cross_summary);
     }
 
     @Override
@@ -85,7 +91,7 @@ public class WekaTest extends ActionBarActivity
 
     @Override
     public void onWekaModelCrossValidated(String summary){
-
+        crossSummary.setText(summary);
     }
 
     @Override

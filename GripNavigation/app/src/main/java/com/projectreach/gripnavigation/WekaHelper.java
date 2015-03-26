@@ -53,22 +53,22 @@ public class WekaHelper {
         }
 
     }
-    private class WekaCrossValidateModel extends AsyncTask <String, Integer, Integer> {
+    private class WekaCrossValidateModel extends AsyncTask <String, Integer, String> {
         private static final String TAG = "WekaCrossValidateModel";
         @Override
-        protected Integer doInBackground(String... filePaths) {
+        protected String doInBackground(String... filePaths) {
             String dataSetPath = filePaths[0];
             Log.d(TAG, "running in background for file @ " + dataSetPath);
-            runWekaTest(dataSetPath);
-            return 0;
+            return runWekaTest(dataSetPath);
         }
 
-        private void runWekaTest(String dataSetPath) {
-        /*
-        * WEKA Android libraries -
-        * [1] https://www.pervasive.jku.at/Teaching/lvaInfo.php?key=346&do=uebungen (THIS IS USED)
-        * [2] https://github.com/rjmarsan/Weka-for-Android
-         */
+        private String runWekaTest(String dataSetPath) {
+            StringBuilder crossSummary = new StringBuilder();
+            /*
+            * WEKA Android libraries -
+            * [1] https://www.pervasive.jku.at/Teaching/lvaInfo.php?key=346&do=uebungen (THIS IS USED)
+            * [2] https://github.com/rjmarsan/Weka-for-Android
+             */
             try {
 //                DataSource source = new DataSource(dataSetPath);
 //                Instances data = source.getDataSet();
@@ -94,15 +94,31 @@ public class WekaHelper {
                 eval.crossValidateModel(cls,data,folds,rand);
 
                 // output evaluation
-                Log.d(TAG, "=== Setup ===");
-                Log.d(TAG, "Classifier: " + cls.getClass().getName() + " " + Utils.joinOptions(cls.getOptions()));
-                Log.d(TAG, "Dataset: " + data.relationName());
-                Log.d(TAG, "Folds: " + folds);
-                Log.d(TAG, "Seed: " + seed);
-                Log.d(TAG, eval.toSummaryString("=== " + folds + "-fold Cross-validation ===", false));
+//                Log.d(TAG, "=== Setup ===");
+//                Log.d(TAG, "Classifier: " + cls.getClass().getName() + " " + Utils.joinOptions(cls.getOptions()));
+//                Log.d(TAG, "Dataset: " + data.relationName());
+//                Log.d(TAG, "Folds: " + folds);
+//                Log.d(TAG, "Seed: " + seed);
+//                Log.d(TAG, eval.toSummaryString("=== " + folds + "-fold Cross-validation ===", false));
+
+                crossSummary.append("=== Setup ===").append("\n");
+                crossSummary.append("Classifier: " + cls.getClass().getName() + " " + Utils.joinOptions(cls.getOptions())).append("\n");
+                crossSummary.append("Dataset: " + data.relationName()).append("\n");
+                crossSummary.append("Folds: " + folds).append("\n");
+                crossSummary.append("Seed: " + seed).append("\n");
+                crossSummary.append(eval.toSummaryString("=== " + folds + "-fold Cross-validation ===", false)).append("\n");
+
             } catch (Exception e) {
                 Log.d(TAG, e.getMessage());
+                crossSummary.append(e.getMessage()).append("\n");
             }
+
+            return crossSummary.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            mListener.onWekaModelCrossValidated(result);
         }
     }
 }
