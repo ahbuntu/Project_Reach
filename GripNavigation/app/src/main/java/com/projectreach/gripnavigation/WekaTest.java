@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ public class WekaTest extends ActionBarActivity
 
     private static final String TAG = "WekaTest";
     private static final String WEKA_DIRECTORY = "GripNavigation_Weka";
-
+    private static String fileName = "";
 
     private TextView crossSummary;
 
@@ -41,6 +42,12 @@ public class WekaTest extends ActionBarActivity
         setContentView(R.layout.activity_weka_test);
 
         crossSummary = (TextView) findViewById(R.id.text_cross_summary);
+        EditText edit_file_name = (EditText) findViewById(R.id.edit_file_name);
+        if (edit_file_name.getText().toString().isEmpty()) {
+            fileName = edit_file_name.getHint().toString();
+        } else {
+            fileName = edit_file_name.getText().toString().trim();
+        }
     }
 
     @Override
@@ -53,7 +60,7 @@ public class WekaTest extends ActionBarActivity
             public void onClick(View v) {
                 if (isExternalStorageWritable()) {
                     File outPath = getWekaDirectory(WekaTest.this, WekaTest.WEKA_DIRECTORY);
-                    File dataFile = new File(outPath, "testRun.arff");
+                    File dataFile = new File(outPath, WekaTest.fileName);
                     Log.d(TAG, "weka dataset file: " + dataFile.getAbsolutePath());
                     if (dataFile.exists()) {
                         WekaHelper wekaHelper = new WekaHelper(WekaTest.this, dataFile.getAbsolutePath());
