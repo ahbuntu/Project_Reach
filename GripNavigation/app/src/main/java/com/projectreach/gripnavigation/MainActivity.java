@@ -106,6 +106,24 @@ public class MainActivity extends Activity {
             }
         });
 
+
+        Button button_create_weka = (Button) findViewById(R.id.button_create_weka);
+        button_create_weka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WekaTest.class);
+                startActivity(intent);
+            }
+        });
+
+        Button button_load_weka = (Button) findViewById(R.id.button_load_weka);
+        button_load_weka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WekaTest.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
