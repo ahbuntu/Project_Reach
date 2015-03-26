@@ -24,12 +24,23 @@ import weka.core.converters.ConverterUtils.DataSource;
 public class WekaHelper {
     private static final String TAG = "WekaHelper";
 
+
+    public interface WekaHelperListerner {
+        public void onWekaModelCrossValidated(String summary);
+        public void onWekaModelSaved();
+        public void onWekaModelLoaded();
+    }
+    private WekaHelperListerner mListener = null;
+
     private String mFilePath;
     private Context mContext;
     public WekaHelper(Context context, String filePath) {
         mContext = context;
+        mListener = (WekaHelperListerner) mContext;
+
         mFilePath = filePath;
     }
+
 
     public void crossValidateModel() {
         Log.d(TAG, "about to execute background crossvalidation");

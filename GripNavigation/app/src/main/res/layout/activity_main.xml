@@ -54,20 +54,12 @@
         android:layout_below="@+id/button_stop_rfduino"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
-    <Button
+    <Button android:id="@+id/button_launch_weka"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create WEKA model"
+        android:text="Launch WEKA Admin"
         android:layout_below="@+id/textView5"
-        android:id="@+id/button_create_weka"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Load WEKA model"
-        android:id="@+id/button_load_weka"
-        android:layout_below="@+id/button_create_weka"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

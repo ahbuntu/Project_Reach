@@ -1,12 +1,15 @@
 package com.projectreach.gripnavigation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
@@ -22,7 +25,9 @@ import weka.filters.Filter;
 import weka.core.converters.ConverterUtils.DataSource;
 
 
-public class WekaTest extends ActionBarActivity {
+public class WekaTest extends ActionBarActivity
+                        implements WekaHelper.WekaHelperListerner{
+
     private static final String TAG = "WekaTest";
     private static final String WEKA_DIRECTORY = "GripNavigation_Weka";
 
@@ -36,18 +41,24 @@ public class WekaTest extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        if (isExternalStorageWritable()) {
-            File outPath = getWekaDirectory(this, WEKA_DIRECTORY);
-            File dataFile = new File(outPath, "testRun.arff");
-            Log.d(TAG, "weka dataset file: " + dataFile.getAbsolutePath());
-            if (dataFile.exists()) {
-                WekaHelper wekaHelper = new WekaHelper(this, dataFile.getAbsolutePath());
-                wekaHelper.crossValidateModel();
-            } else {
-                Toast.makeText(this, "Dataset does not exist", Toast.LENGTH_SHORT).show();
-            }
+        Button button_weka_crossvalidate = (Button) findViewById(R.id.button_weka_crossvalidate);
+        button_weka_crossvalidate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isExternalStorageWritable()) {
+                    File outPath = getWekaDirectory(WekaTest.this, WekaTest.WEKA_DIRECTORY);
+                    File dataFile = new File(outPath, "testRun.arff");
+                    Log.d(TAG, "weka dataset file: " + dataFile.getAbsolutePath());
+                    if (dataFile.exists()) {
+                        WekaHelper wekaHelper = new WekaHelper(WekaTest.this, dataFile.getAbsolutePath());
+                        wekaHelper.crossValidateModel();
+                    } else {
+                        Toast.makeText(WekaTest.this, "Dataset does not exist", Toast.LENGTH_SHORT).show();
+                    }
 
-        }
+                }
+            }
+        });
     }
 
     /**
@@ -72,6 +83,15 @@ public class WekaTest extends ActionBarActivity {
         return file;
     }
 
+    @Override
+    public void onWekaModelCrossValidated(String summary){
+
+    }
+
+    @Override
+    public void onWekaModelSaved(){}
+    @Override
+    public void onWekaModelLoaded(){}
     //region options menu
 
     @Override
