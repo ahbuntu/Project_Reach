@@ -15,6 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Random;
 
 import weka.classifiers.Classifier;
@@ -33,9 +37,10 @@ public class WekaTest extends ActionBarActivity
     private static final String TAG = "WekaTest";
     private static final String WEKA_DIRECTORY = "GripNavigation_Weka";
     private static String fileName = "";
+    private static String modelName = "";
 
     private TextView crossSummary;
-
+    private WekaHelper wekaHelper = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,7 @@ public class WekaTest extends ActionBarActivity
         }
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -63,17 +69,51 @@ public class WekaTest extends ActionBarActivity
                     File dataFile = new File(outPath, WekaTest.fileName);
                     Log.d(TAG, "weka dataset file: " + dataFile.getAbsolutePath());
                     if (dataFile.exists()) {
-                        WekaHelper wekaHelper = new WekaHelper(WekaTest.this, dataFile.getAbsolutePath());
+                        wekaHelper = new WekaHelper(WekaTest.this, dataFile.getAbsolutePath());
                         wekaHelper.crossValidateModel();
                     } else {
                         Toast.makeText(WekaTest.this, "Dataset does not exist", Toast.LENGTH_SHORT).show();
                     }
+                }
+            }
+        });
 
+        Button button_weka_save = (Button) findViewById(R.id.button_weka_save);
+        button_weka_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (wekaHelper == null) {
+                    Toast.makeText(WekaTest.this, "You must train and crossvalidate first", Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    File outPath = getWekaDirectory(WekaTest.this, WekaTest.WEKA_DIRECTORY);
+                    WekaTest.modelName = generateModelNameToSave(WekaTest.fileName);
+                    File dataFile = new File(outPath, WekaTest.modelName);
+                    Log.d(TAG, "weka model name: " + dataFile.getAbsolutePath());
+                    if (dataFile.exists()) {
+                        Toast.makeText(WekaTest.this, "Model already exists. ABORT!", Toast.LENGTH_SHORT).show();
+                    } else {
+//                        wekaHelper = new WekaHelper(WekaTest.this);
+                        wekaHelper.saveModel(dataFile.getAbsolutePath());
+                    }
                 }
             }
         });
     }
 
+    /**
+     * generates the name of the model based on the provided filename
+     * @param datasetName
+     * @return
+     */
+    private String generateModelNameToSave(String datasetName) {
+        int pos = datasetName.lastIndexOf(".");
+        if (pos > 0) {
+            datasetName = datasetName.substring(0, pos);
+        }
+        datasetName = datasetName + ".model";
+        return datasetName;
+    }
     /**
      * Checks if external storage is available for read and write
      *
