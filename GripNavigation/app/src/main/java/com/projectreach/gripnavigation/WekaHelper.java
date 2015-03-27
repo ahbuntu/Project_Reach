@@ -8,10 +8,12 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Random;
 
@@ -32,7 +34,7 @@ public class WekaHelper {
     public interface WekaHelperListerner {
         public void onWekaModelCrossValidated(String summary);
         public void onWekaModelSaved();
-        public void onWekaModelLoaded();
+        public void onWekaModelLoaded(Classifier model);
     }
     private WekaHelperListerner mListener = null;
 
@@ -82,6 +84,17 @@ public class WekaHelper {
         } else {
             WekaSaveModel weka = new WekaSaveModel();
             weka.execute(filePath);
+        }
+    }
+
+    public void loadModel(String filePath) {
+        Log.d(TAG, "about to execute savemodel");
+        File dataFile = new File(filePath);
+        if (dataFile.exists()) {
+            WekaLoadModel weka = new WekaLoadModel();
+            weka.execute(filePath);
+        } else {
+            Toast.makeText(mContext, "Model doesn't exist. ABORT!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -185,7 +198,6 @@ public class WekaHelper {
                 oos = new ObjectOutputStream(
                         new FileOutputStream(targetPath));
 //                        new FileOutputStream("/weka_models/" + name + ".model"));
-
             } catch (FileNotFoundException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
@@ -198,6 +210,41 @@ public class WekaHelper {
 
         @Override
         protected void onPostExecute(Classifier result) {
+        }
+    }
+
+    private class WekaLoadModel extends AsyncTask <String, Integer, Classifier> {
+        private static final String TAG = "WekaSaveModel";
+        private File mLoadPath;
+
+        @Override
+        protected Classifier doInBackground(String... filePaths) {
+            String dataSetPath = filePaths[0];
+            Log.d(TAG, "loading model from file @ " + dataSetPath);
+            mLoadPath = new File(dataSetPath);
+            try {
+                modelCls = loadModel(mLoadPath);
+            } catch (Exception e) {
+                Log.d(TAG, e.getMessage());
+            }
+            return modelCls;
+        }
+
+        private Classifier loadModel(File targetPath) throws Exception {
+            Classifier classifier;
+
+            FileInputStream fis = new FileInputStream(targetPath);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            classifier = (Classifier) ois.readObject();
+            ois.close();
+
+            return classifier;
+        }
+
+        @Override
+        protected void onPostExecute(Classifier result) {
+            mListener.onWekaModelLoaded(result);
         }
     }
 }

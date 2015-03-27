@@ -65,7 +65,7 @@ public class WekaTest extends ActionBarActivity
             @Override
             public void onClick(View v) {
                 if (isExternalStorageWritable()) {
-                    File outPath = getWekaDirectory(WekaTest.this, WekaTest.WEKA_DIRECTORY);
+                    File outPath = getWekaDirectory(WekaTest.WEKA_DIRECTORY);
                     File dataFile = new File(outPath, WekaTest.fileName);
                     Log.d(TAG, "weka dataset file: " + dataFile.getAbsolutePath());
                     if (dataFile.exists()) {
@@ -86,7 +86,7 @@ public class WekaTest extends ActionBarActivity
                     Toast.makeText(WekaTest.this, "You must train and crossvalidate first", Toast.LENGTH_SHORT)
                             .show();
                 } else {
-                    File outPath = getWekaDirectory(WekaTest.this, WekaTest.WEKA_DIRECTORY);
+                    File outPath = getWekaDirectory(WekaTest.WEKA_DIRECTORY);
                     WekaTest.modelName = generateModelNameToSave(WekaTest.fileName);
                     File dataFile = new File(outPath, WekaTest.modelName);
                     Log.d(TAG, "weka model name: " + dataFile.getAbsolutePath());
@@ -97,6 +97,27 @@ public class WekaTest extends ActionBarActivity
                         wekaHelper.saveModel(dataFile.getAbsolutePath());
                     }
                 }
+            }
+        });
+
+        Button button_weka_load = (Button) findViewById(R.id.button_weka_load);
+        button_weka_load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    //TODO: need to fix this to make more generic load implementation
+                    File outPath = getWekaDirectory(WekaTest.WEKA_DIRECTORY);
+                    WekaTest.modelName = generateModelNameToSave(WekaTest.fileName);
+                    File dataFile = new File(outPath, WekaTest.modelName);
+                    Log.d(TAG, "weka model to load: " + dataFile.getAbsolutePath());
+                if (wekaHelper == null) {
+                    wekaHelper = new WekaHelper(WekaTest.this, dataFile.getAbsolutePath());
+                }
+                    if (dataFile.exists()) {
+                        wekaHelper.loadModel(dataFile.getAbsolutePath());
+                    } else {
+                        Toast.makeText(WekaTest.this, "Model doesn't exist. ABORT!", Toast.LENGTH_SHORT).show();
+                    }
             }
         });
     }
@@ -126,7 +147,7 @@ public class WekaTest extends ActionBarActivity
         return false;
     }
 
-    public File getWekaDirectory(Context context, String dirName) {
+    public File getWekaDirectory(String dirName) {
         // Get the directory for the public documents directory.
         File file = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOCUMENTS), dirName);
@@ -143,8 +164,15 @@ public class WekaTest extends ActionBarActivity
 
     @Override
     public void onWekaModelSaved(){}
+
     @Override
-    public void onWekaModelLoaded(){}
+    public void onWekaModelLoaded(Classifier model){
+        if (model == null) {
+            Log.d(TAG, "ruhroh");
+        } else {
+            Log.d(TAG, "retreived model: " + model.toString());
+        }
+    }
     //region options menu
 
     @Override
