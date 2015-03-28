@@ -139,11 +139,18 @@ public class MainActivity extends Activity {
 
             //each list item corresponds to a sampling of 20 values for a single sensor value
             //expecting that size of values will always be 15
-            List<WindowBuffer> values = intent.getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
+            List<WindowBuffer> sensorValues = intent.getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
 
             //log to file
             LogOutputWriter outputLogger = new LogOutputWriter(MainActivity.this, 3);
-            outputLogger.execute(values);
+            outputLogger.execute(sensorValues);
+
+            List<Float> sensorMeanValues = FeatureExtractor.calculateMean(sensorValues);
+            int idx = 0;
+            for (Float sensorMean : sensorMeanValues) {
+                Log.d(TAG, "Sensor" +idx+ " mean : " + sensorMean);
+                idx++;
+            }
         }
     };
 
