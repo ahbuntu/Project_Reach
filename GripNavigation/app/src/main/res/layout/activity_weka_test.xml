@@ -1,63 +1,88 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.projectreach.gripnavigation.WekaTest"
-    android:orientation="vertical">
-
-
-    <TextView android:text="File should be placed in the \'Documents\' folder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
+    tools:context="com.projectreach.gripnavigation.WekaTest">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView android:text="Enter file name:"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            <TextView android:text="File should be placed in the \'Documents\' folder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <EditText android:id="@+id/edit_file_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="testRun.arff"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView android:text="Enter file name:"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <EditText android:id="@+id/edit_file_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="testRun.arff"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <Button android:id="@+id/button_weka_crossvalidate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crossvalidate WEKA model"
+                />
+
+            <TextView android:text="Cross Validation Summary"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView android:id="@+id/text_cross_summary"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+
+            <Button android:id="@+id/button_weka_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save WEKA model"
+                />
+
+            <Button android:id="@+id/button_weka_load"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Load WEKA model"
+                />
+
+            <TextView android:text="Saved Weka Models"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <ListView android:id="@+id/list_saved_models"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom" />
         </LinearLayout>
 
-    <Button android:id="@+id/button_weka_crossvalidate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Crossvalidate WEKA model"
-    />
-
-    <TextView android:text="Cross Validation Summary"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
-
-    <TextView android:id="@+id/text_cross_summary"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        </ScrollView>
+</FrameLayout>
 
 
-    <Button android:id="@+id/button_weka_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save WEKA model"
-        />
-
-    <Button android:id="@+id/button_weka_load"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Load WEKA model"
-        />
-
-</LinearLayout>

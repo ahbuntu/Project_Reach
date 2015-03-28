@@ -9,16 +9,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Random;
 
 import weka.classifiers.Classifier;
@@ -41,6 +47,12 @@ public class WekaTest extends ActionBarActivity
 
     private TextView crossSummary;
     private WekaHelper wekaHelper = null;
+
+
+    private ArrayAdapter<String> mSavedModelAdapter;
+    private AbsListView mListView;
+    String[] savedFiles;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +65,36 @@ public class WekaTest extends ActionBarActivity
         } else {
             fileName = edit_file_name.getText().toString().trim();
         }
+
+
+        ArrayList<String> savedModelsList = readModelFileList();
+        savedFiles = new String[savedModelsList.size()];
+        savedFiles = savedModelsList.toArray(savedFiles);
+        mSavedModelAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, savedFiles);
+
+        mListView = (AbsListView) findViewById(R.id.list_saved_models);
+        mListView.setAdapter(mSavedModelAdapter);
+//        mListView.setOnItemClickListener(this);
+    }
+
+    public ArrayList<String> readModelFileList() {
+        ArrayList<String> modelList = new ArrayList<>();
+        try {
+            File modelPath = getWekaDirectory(WekaTest.WEKA_DIRECTORY);
+            File files[] = modelPath.listFiles();
+            for (int i=0; i < files.length; i++)
+            {
+                String ext = fileName.substring((fileName.lastIndexOf(".") + 1), fileName.length());
+                if (ext.equals("model")) {
+                    Log.d(TAG, "Saved Model FileName:" + files[i].getName());
+                    modelList.add(files[i].getName());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return modelList;
     }
 
 
