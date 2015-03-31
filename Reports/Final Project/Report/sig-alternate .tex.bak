@@ -62,7 +62,7 @@
 %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % --- End of Author Metadata ---
 
-\title{TGDB: Towards a Benchmark for Graph Databases}
+\title{REACH: Enabling Single-Handed Operation on Large Screen Mobile Devices}
 
 %
 % You need the command \numberofauthors to handle the 'placement
@@ -111,18 +111,16 @@ Varun Perumal\\
        \affaddr{Dept. of Computer Science}\\
        \affaddr{University of Toronto}\\
        \email{varun@cs.toronto.edu}
-}
 % 2nd author
 \alignauthor
 Ahmadul Hassan\\
        \affaddr{Dept. of Computer Science}\\
        \affaddr{University of Toronto}\\
        \email{ahmadul.hassan@gmail.com}
-}
 % 3rd author
 \alignauthor
 Zahid Abul-Basher\\
-       \affaddr{Mechanical \& Industrial Engineering}\\
+       \affaddr{Mech. \& Industrial Eng.}\\
        \affaddr{University of Toronto}\\
        \email{zahid@cs.toronto.edu}
 }
@@ -137,15 +135,15 @@ Zahid Abul-Basher\\
 
 \maketitle
 \begin{abstract}
-  
+
 \end{abstract}
 
 % A category with the (minimum) three required fields
-\category{H.2.8}{Database Management}{Database Applications}
+\category{H.5.2}{Information interfaces and presentation}{User Interfaces---graphical user interfaces}
 %A category including the fourth, optional field follows...
 %\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
 
-\terms{Algorithms, Design, Experimentation, Performance}
+\terms{Design, Experimentation, Human Factors}
 
 \keywords{Data analytics}
 
@@ -154,7 +152,7 @@ There is an unprecedented rise in popularity of large screen mobile phones with 
 \par
 By placing force sensors all around the rim of the phone, we can sense how the user is holding the phone and when they are straining their thumb to reach a corner. Using this information we can shift the UI closer to the operating finger. The force sensors can also be used to interact with the phone in other scenarios, for example swiping on the sides of the phone could scroll pages, or increase/decrees volume etc. With this project we intend to build the hardware, formulate UI design changes, and do basic user testing to validate our ideas.
 \section{Related Work}
-
+Many researchers have suggested that the devices should be intelligent enough to detect user's situation for better support as in \cite{Johnson:1998:UMIM} and \cite{Schmidt:1999:AIC}. For instance, \emph{ability based design} aims to find the best match between the ability of the users and the interfaces \cite{}.
 
 
 

@@ -1,3 +1,40 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{Choudhury:2008:MSP}
+T.~Choudhury, S.~Consolvo, B.~Harrison, J.~Hightower, A.~LaMarca, L.~LeGrand,
+  A.~Rahimi, A.~Rea, G.~Bordello, B.~Hemingway, et~al.
+\newblock The mobile sensing platform: An embedded activity recognition system.
+\newblock {\em Pervasive Computing, IEEE}, 7(2):32--41, 2008.
+
+\bibitem{Johnson:1998:UMIM}
+P.~Johnson.
+\newblock Usability and mobility; interactions on the move.
+\newblock In {\em First Workshop on Human Computer Interaction with Mobile
+  Devices}, 1998.
+
+\bibitem{Schmidt:1999:AIC}
+A.~Schmidt, K.~A. Aidoo, A.~Takaluoma, U.~Tuomela, K.~V. Laerhoven, and
+  W.~V.~d. Velde.
+\newblock Advanced interaction in context.
+\newblock In {\em Proceedings of the 1st International Symposium on Handheld
+  and Ubiquitous Computing}, HUC '99, pages 89--101, 1999.
+
+\bibitem{Schmidt:1999:advanced}
+A.~Schmidt, K.~A. Aidoo, A.~Takaluoma, U.~Tuomela, K.~Van~Laerhoven, and
+  W.~Van~de Velde.
+\newblock Advanced interaction in context.
+\newblock In {\em Handheld and ubiquitous computing}, pages 89--101, 1999.
+
+\bibitem{Van:2000:WhatShallWe}
+K.~Van~Laerhoven and O.~Cakmakci.
+\newblock What shall we teach our pants?
+\newblock In {\em Wearable Computers, The Fourth International Symposium on},
+  pages 77--83. IEEE, 2000.
+
+\bibitem{Wobbrock:2011:adcpe}
+J.~O. Wobbrock, S.~K. Kane, K.~Z. Gajos, S.~Harada, and J.~Froehlich.
+\newblock Ability-based design: Concept, principles and examples.
+\newblock {\em ACM Transactions on Accessible Computing (TACCESS)}, 3(3):9,
+  2011.
 
 \end{thebibliography}

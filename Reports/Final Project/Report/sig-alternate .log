@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.2.3)  19 MAR 2015 15:18
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.2.3)  31 MAR 2015 15:46
 entering extended mode
-**E:/Courses/Cloud*Computing/Project/Final*Project/Report/sig-alternate*.tex
-("E:/Courses/Cloud Computing/Project/Final Project/Report/sig-alternate .tex"
+**E:/GitHub/Project_Reach/Reports/Final*Project/Report/sig-alternate*.tex
+("E:/GitHub/Project_Reach/Reports/Final Project/Report/sig-alternate .tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,7 +13,7 @@ german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-("E:\Courses\Cloud Computing\Project\Final Project\Report\sig-alternate.cls"
+("E:\GitHub\Project_Reach\Reports\Final Project\Report\sig-alternate.cls"
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\epsfig.sty"
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
 
@@ -296,8 +296,7 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \c@algocf=\count116
 \algocf@algoframe=\box37
 \algocf@algobox=\box38
-) ("E:\Courses\Cloud Computing\Project\Final Project\Report\sig-alternate .aux"
-)
+) ("E:\GitHub\Project_Reach\Reports\Final Project\Report\sig-alternate .aux")
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
 LaTeX Font Info:    ... okay on input line 57.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
@@ -310,7 +309,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
 LaTeX Font Info:    ... okay on input line 57.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
 LaTeX Font Info:    ... okay on input line 57.
- ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count117
 \scratchdimen=\dimen138
@@ -344,31 +344,32 @@ Overfull \hbox (18.89441pt too wide) in paragraph at lines 136--136
  []\eaddfnt ahmadul.hassan@gmail.com| 
  []
 
-("E:\Courses\Cloud Computing\Project\Final Project\Report\sig-alternate .bbl")
+("E:\GitHub\Project_Reach\Reports\Final Project\Report\sig-alternate .bbl")
 [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
-("E:\Courses\Cloud Computing\Project\Final Project\Report\sig-alternate .aux") 
-) 
+("E:\GitHub\Project_Reach\Reports\Final Project\Report\sig-alternate .aux") ) 
 Here is how much of TeX's memory you used:
- 5175 strings out of 493921
- 72901 string characters out of 3147274
- 151120 words of memory out of 3000000
- 8406 multiletter control sequences out of 15000+200000
- 47046 words of font info for 63 fonts, out of 3000000 for 9000
+ 5185 strings out of 493921
+ 73019 string characters out of 3147274
+ 155138 words of memory out of 3000000
+ 8413 multiletter control sequences out of 15000+200000
+ 49529 words of font info for 66 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 41i,10n,38p,738b,255s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/urw/helvetic/uhvb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helve
-tic/uhvr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "sig-alternate .pdf" (1 page, 80916 bytes).
+ 41i,10n,38p,1150b,255s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C
+:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmti9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/hel
+vetic/uhvb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/urw/times/utmri8a.pfb>
+Output written on "sig-alternate .pdf" (1 page, 104989 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
+ 39 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
