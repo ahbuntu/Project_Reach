@@ -115,6 +115,8 @@ public class SensorReader extends Service
 //        sendBroadcast(intent);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 //            Log.d(TAG, "Broadcast sent");
+        broadcastCounter = 0;
+        sensorData.clear();
     }
 
     private class SensorEventEvalTask extends AsyncTask<SensorEvent, Integer, Integer> {

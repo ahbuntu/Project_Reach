@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,19 +22,54 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
     private int numberOfAxis = 16; //by default
     Context mContext;
 
+    File logFile;
+    FileOutputStream f;
+    PrintWriter pw;
+
     public LogOutputWriter(Context context, int axisCount) {
         mContext = context;
         numberOfAxis = axisCount;
     }
     @Override
     protected Integer doInBackground(List<WindowBuffer>... values) {
-        if (isExternalStorageWritable()) {
-            File outPath = getLogOutputStorageDir(mContext, LOG_DIRECTORY);
-            File logFile = new File(outPath, "log.txt");
-            Log.d(TAG, "log file written to: " + logFile.getAbsolutePath());
+        if (logFile != null) {
             writeToLogFile(logFile, values[0]);
         }
         return 0;
+    }
+
+    public void logValuesToFile(List<WindowBuffer> values) {
+        List<WindowBuffer> valuesToLog = new ArrayList<WindowBuffer>(values);
+        writeToLogFile(logFile, valuesToLog);
+    }
+
+    public void initialize() {
+        if (isExternalStorageWritable()) {
+            File outPath = getLogOutputStorageDir(mContext, LOG_DIRECTORY);
+            logFile = new File(outPath, "log.txt");
+            Log.d(TAG, "log file written to: " + logFile.getAbsolutePath());
+            try {
+                f = new FileOutputStream(logFile, true); //append file
+                pw = new PrintWriter(f);
+            }catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.i(TAG, "******* File not found. Did you" +
+                        " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
+            }
+        }
+    }
+
+    public void cease() {
+        if (f!= null) {
+            try {
+                f.close();
+                pw.flush();
+                pw.close();
+            } catch (IOException e) {
+                Log.d(TAG, "error trying to close the file");
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -78,11 +114,9 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
     private void writeToLogFile(File outFile, List<WindowBuffer> outBuffer){
 
         try {
-            FileOutputStream f = new FileOutputStream(outFile, true); //append file
-            PrintWriter pw = new PrintWriter(f);
-            StringBuilder outputLine = new StringBuilder();
             int sensorIndex = 0;
             for (WindowBuffer sensorWindow : outBuffer) {
+                StringBuilder outputLine = new StringBuilder();
                 outputLine.append(sensorIndex).append(",");
                 float[] sensorValues = sensorWindow.getSensorValues();
                 for (int i = 0; i < sensorValues.length; i++) {
@@ -94,16 +128,11 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
                     sensorIndex++;
                 }
                 outputLine.append(System.currentTimeMillis()).append('\n');
-                pw.println(outputLine);
+                pw.println(outputLine.toString());
+                Log.d(TAG, "DOUBLE TIME now : " + outputLine.toString());
             }
-            pw.flush();
-            pw.close();
-            f.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Log.i(TAG, "******* File not found. Did you" +
-                    " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
-        } catch (IOException e) {
+        } catch (Exception e ) {
+            Log.d(TAG, "WTF exception");
             e.printStackTrace();
         }
     }

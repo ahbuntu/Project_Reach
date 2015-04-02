@@ -34,6 +34,8 @@ public class MainActivity extends Activity {
     private SensorReader  mBoundService;
     private boolean mIsBound = false;
 
+    //log to file
+    LogOutputWriter outputLogger = null;
     private int logOutBufferSize = 100 ;
     private List<WindowBuffer> logOutBuffer = new ArrayList<>(logOutBufferSize * 16);
 
@@ -86,6 +88,13 @@ public class MainActivity extends Activity {
             }
         });
 
+        Button button_stopService = (Button) findViewById(R.id.button_stop_service);
+        button_stopService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopSensing();
+            }
+        });
 
         Button button_start_rfduino = (Button) findViewById(R.id.button_start_rfduino);
         button_start_rfduino.setOnClickListener(new View.OnClickListener() {
@@ -129,40 +138,79 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
+        stopSensing();
     }
 
     private  BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d(TAG,"BroadcastReceiver onReceive called");
-            //TODO: do something useful with the received value
+//            Log.d(TAG,"BroadcastReceiver onReceive called");
 
             //each list item corresponds to a sampling of 20 values for a single sensor value
             //expecting that size of values will always be 15
-            List<WindowBuffer> sensorValues = intent.getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
+            ArrayList<WindowBuffer> sensorValues = intent.getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
 
-            //log to file
-            LogOutputWriter outputLogger = new LogOutputWriter(MainActivity.this, 3);
-            outputLogger.execute(sensorValues);
 
-            List<Float> sensorMeanValues = FeatureExtractor.calculateMean(sensorValues);
-            int idx = 0;
-            for (Float sensorMean : sensorMeanValues) {
-                Log.d(TAG, "Sensor" +idx+ " mean : " + sensorMean);
-                idx++;
+//            outputLogger.execute(sensorValues);
+            if (sensorValues.size() > 0) {
+                outputLogger.logValuesToFile(sensorValues);
             }
+
+//            List<Float> sensorMeanValues = FeatureExtractor.calculateMean(sensorValues);
+//            int idx = 0;
+//            for (Float sensorMean : sensorMeanValues) {
+//                Log.d(TAG, "Sensor" +idx+ " mean : " + sensorMean);
+//                idx++;
+//            }
         }
     };
 
+    /**
+     * creates the log file and opens it for writing
+     *
+     * @param sensorAxis - the number of sensor windows in a single transmission
+     */
+    private void prepareLogging(int sensorAxis) {
+        if (outputLogger == null) {
+            outputLogger = new LogOutputWriter(MainActivity.this, sensorAxis);
+            outputLogger.initialize();
+        }
+    }
+
+    /**
+     * stops writing to the file and closes it
+     *
+     */
+    private void ceaseLogging() {
+        if (outputLogger != null) {
+            outputLogger.cease();
+            outputLogger = null;
+        }
+    }
     /**
      * starts the service to log sensor data
      */
     private void startSensing() {
         if (!mIsBound) {
+            prepareLogging(3); //x,y,z axis = 3
+
             Intent intent = new Intent(this, SensorReader.class);
             intent.putExtra("windowsize", 20); //pass windowsize in a bundle
-            bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+            this.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
             mIsBound = true;
+            Toast.makeText(this, "Starting accelerometer data logging.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * stops the service to log sensor data
+     */
+    private void stopSensing() {
+        if (mIsBound) {
+            this.unbindService(mServiceConnection);
+            mIsBound = false;
+            Toast.makeText(this, "Stopping accelerometer data logging.", Toast.LENGTH_SHORT).show();
+            ceaseLogging();
         }
     }
 
