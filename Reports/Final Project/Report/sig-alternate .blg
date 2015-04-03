@@ -1,10 +1,8 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: sig-alternate .aux
 The style file: abbrv.bst
-I found no \citation commands---while reading file sig-alternate .aux
 Database file #1: sigproc.bib
-I was expecting a `,' or a `}'---line 501 of file sigproc.bib
- :   
- :   NOTE =    {http://www.orafaq.com/node/2756, 2012},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-(There were 2 error messages)
+Warning--I didn't find a database entry for "Schmidt:1999:advanced"
+Warning--empty institution in Karlson:2006:usm
+Warning--can't use both volume and number fields in kim:2006:hand
+Warning--empty journal in Strachan:2004:MTI
+(There were 4 warnings)
