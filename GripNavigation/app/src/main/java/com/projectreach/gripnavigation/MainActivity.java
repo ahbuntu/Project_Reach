@@ -150,16 +150,37 @@ public class MainActivity extends Activity {
             //expecting that size of values will always be 15
             ArrayList<WindowBuffer> sensorValues = intent.getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
 
+            Log.d(TAG, "#values RECIVED = " + sensorValues.size());
             for (WindowBuffer evalWindow : sensorValues) {
+                StringBuilder output = new StringBuilder();
                 if (evalWindow  == null) {
                     Log.d(TAG, "WHY IS THIS NuLL??");
                 }
+                float[] evalArray = evalWindow.getSensorValues();
+                for (int i = 0; i < evalArray.length; i++) {
+                    output.append(evalArray[i]).append(",");
+                }
+                Log.d(TAG, "axis : " + output.toString());
             }
 
-//            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
+            outputLogger.logSingleLine("============ SUM ============");
+            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
+            for (float sums : sumFeatureList) {
+                Log.d(TAG, "axis sum: " + sums);
+            }
+            outputLogger.logFeatureValuesToFile(sumFeatureList);
+
+            outputLogger.logSingleLine("============ MEAN ============");
+            List<Float> meanFeatureList =  FeatureExtractor.calculateMean(sensorValues);
+            for (float means : meanFeatureList ) {
+                Log.d(TAG, "axis mean: " + means);
+            }
+            outputLogger.logFeatureValuesToFile(meanFeatureList );
+
 //            List<Float> meanFeatureList = FeatureExtractor.calculateMean(sensorValues);
 
-            outputLogger.logTemporalValuesToFile(sensorValues);
+            // log values line by line
+//            outputLogger.logTemporalValuesToFile(sensorValues);
 
 //            ArrayList<Inte> sumSensorValues = new ArrayList<>();
 //            int length = sensorValues.get(0).getSensorValues().length;

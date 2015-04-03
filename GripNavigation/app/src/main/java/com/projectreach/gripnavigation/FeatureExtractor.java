@@ -11,6 +11,18 @@ public final class FeatureExtractor {
         //prevents instantiation
     }
 
+    /**
+     * calculates the sum of the provided array
+     * @param array
+     * @return
+     */
+    private static float getSum(float[] array) {
+        float sum = 0;
+        for (int i=0; i < array.length; i++) {
+            sum += array[i]; //calculates the sum of the array
+        }
+        return (sum);
+    }
 
     /**
      * calculates the mean of the provided array
@@ -19,11 +31,19 @@ public final class FeatureExtractor {
      */
     private static float getMean(float[] array) {
         float sum = 0;
-        for (int i=0; i < array.length; i++) {
-            sum += array[i]; //calculates the sum of the array
-        }
-        return (sum/array.length);
+        return (getSum(array)/array.length);
     }
+
+    public static List<Float> calculateSum(List<WindowBuffer> sensorValues) {
+        List<Float> sumValues = new ArrayList<>(sensorValues.size());
+        for (WindowBuffer window : sensorValues) {
+            //iterating over each sensor's window
+            sumValues.add(getSum(window.getSensorValues()));
+        }
+        return sumValues;
+    }
+
+
     public static List<Float> calculateMean(List<WindowBuffer> sensorValues) {
         List<Float> meanValues = new ArrayList<>(sensorValues.size());
         for (WindowBuffer window : sensorValues) {

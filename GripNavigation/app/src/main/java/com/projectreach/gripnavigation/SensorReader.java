@@ -120,12 +120,13 @@ public class SensorReader extends Service
      * sends the broadcast
      */
     private void readyToBroadcast() {
+        ArrayList<WindowBuffer> dataToSend = new ArrayList<>(sensorData);
         Intent intent = new Intent();
         intent.setAction(Constants.BROADCAST_ACTION);
-        intent.putParcelableArrayListExtra(Constants.ARG_SENSOR_VAL, (ArrayList<WindowBuffer>) sensorData);
-//        sendBroadcast(intent);
+        intent.putParcelableArrayListExtra(Constants.ARG_SENSOR_VAL, (ArrayList<WindowBuffer>) dataToSend);
+
+        Log.d(TAG, "#values SENT = " + dataToSend.size());
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-//            Log.d(TAG, "Broadcast sent");
         broadcastCounter = 0;
         sensorData.clear();
     }

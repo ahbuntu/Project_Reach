@@ -25,6 +25,7 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
     File logFile;
     FileOutputStream f;
     PrintWriter pw;
+    int indexCounter = 0;
 
     public LogOutputWriter(Context context, int axisCount) {
         mContext = context;
@@ -36,6 +37,31 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
 //            writeToLogFile(logFile, values[0]);
         }
         return 0;
+    }
+
+    public void logSingleLine(String value) {
+        try {
+            pw.println(value);
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void logFeatureValuesToFile(List<Float> featureValues) {
+        try {
+            indexCounter++;
+            StringBuilder outputLine = new StringBuilder();
+            outputLine.append(indexCounter).append(",");
+            for (float value : featureValues) {
+                //format: index, S1, S2, S3, S4, timestamp
+                outputLine.append(value).append(",");
+            }
+            outputLine.append(System.currentTimeMillis());
+            pw.println(outputLine.toString());
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
     }
 
     public void logTemporalValuesToFile(List<WindowBuffer> values) {
@@ -72,6 +98,7 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
 
     public void initialize() {
         if (isExternalStorageWritable()) {
+            indexCounter = 0;
             File outPath = getLogOutputStorageDir(mContext, LOG_DIRECTORY);
             logFile = new File(outPath, "log_" + System.currentTimeMillis() + ".txt");
             Log.d(TAG, "log file written to: " + logFile.getAbsolutePath());
