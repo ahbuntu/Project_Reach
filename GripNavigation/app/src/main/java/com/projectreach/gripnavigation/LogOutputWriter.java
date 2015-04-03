@@ -33,20 +33,47 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
     @Override
     protected Integer doInBackground(List<WindowBuffer>... values) {
         if (logFile != null) {
-            writeToLogFile(logFile, values[0]);
+//            writeToLogFile(logFile, values[0]);
         }
         return 0;
     }
 
-    public void logValuesToFile(List<WindowBuffer> values) {
+    public void logTemporalValuesToFile(List<WindowBuffer> values) {
         List<WindowBuffer> valuesToLog = new ArrayList<WindowBuffer>(values);
-        writeToLogFile(logFile, valuesToLog);
+        try {
+            int sensorIndex = 1;
+            for (WindowBuffer sensorWindow : valuesToLog) {
+
+                if (sensorWindow == null) {
+                    Log.d(TAG, "WHY IS THIS NuLL??");
+                }
+
+                StringBuilder outputLine = new StringBuilder();
+                outputLine.append(sensorIndex).append(",");
+
+                if (sensorIndex == numberOfAxis) {
+                    sensorIndex = 1; //the values will start to repeat after this
+                } else {
+                    sensorIndex++;
+                }
+                float[] sensorValues = sensorWindow.getSensorValues();
+                for (int i = 0; i < sensorValues.length; i++) {
+                    outputLine.append( (int) (sensorValues[i]*100)).append(",");
+                }
+
+                outputLine.append(System.currentTimeMillis());
+                pw.println(outputLine.toString());
+//                Log.d(TAG, "DOUBLE TIME now : " + outputLine.toString());
+            }
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
     }
 
     public void initialize() {
         if (isExternalStorageWritable()) {
             File outPath = getLogOutputStorageDir(mContext, LOG_DIRECTORY);
-            logFile = new File(outPath, "log.txt");
+            logFile = new File(outPath, "log_" + System.currentTimeMillis() + ".txt");
             Log.d(TAG, "log file written to: " + logFile.getAbsolutePath());
             try {
                 f = new FileOutputStream(logFile, true); //append file
@@ -107,33 +134,4 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
         return file;
     }
 
-    /** Method to write ascii text characters to file on SD card. Note that you must add a
-     WRITE_EXTERNAL_STORAGE permission to the manifest file or this method will throw
-     a FileNotFound Exception because you won't have write permission. */
-
-    private void writeToLogFile(File outFile, List<WindowBuffer> outBuffer){
-
-        try {
-            int sensorIndex = 0;
-            for (WindowBuffer sensorWindow : outBuffer) {
-                StringBuilder outputLine = new StringBuilder();
-                outputLine.append(sensorIndex).append(",");
-                float[] sensorValues = sensorWindow.getSensorValues();
-                for (int i = 0; i < sensorValues.length; i++) {
-                    outputLine.append(sensorValues[i]).append(",");
-                }
-                if ((sensorIndex % numberOfAxis) == 0) {
-                    sensorIndex = 0; //the values will start to repeat after this
-                } else {
-                    sensorIndex++;
-                }
-                outputLine.append(System.currentTimeMillis()).append('\n');
-                pw.println(outputLine.toString());
-                Log.d(TAG, "DOUBLE TIME now : " + outputLine.toString());
-            }
-        } catch (Exception e ) {
-            Log.d(TAG, "WTF exception");
-            e.printStackTrace();
-        }
-    }
 }

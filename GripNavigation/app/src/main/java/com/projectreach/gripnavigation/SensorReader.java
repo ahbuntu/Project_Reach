@@ -37,7 +37,7 @@ public class SensorReader extends Service
     private int BROADCAST_AXIS_SIZE = 3; //TODO: corresponds to number of axis - make this part of constructor
     private int broadcastCounter = 0;
 
-    private int windowSize = 5;
+    private int windowSize = 20;
     private Queue<Float> x_buffQueue = null;
     private Queue<Float> y_buffQueue = null;
     private Queue<Float> z_buffQueue = null;
@@ -61,14 +61,24 @@ public class SensorReader extends Service
     //region Service implementations
 
     @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand called");
+        windowSize = intent.getIntExtra(Constants.ARG_WINDOW_SIZE, 20);
+        Log.d(TAG, "sliding window size = " + windowSize);
+        // We want this service to continue running until it is explicitly
+        // stopped, so return sticky.
+        return START_STICKY;
+    }
+
+    @Override
     public IBinder onBind(Intent intent) {
         Log.d(TAG, "onBind is called");
 
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mSensorAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorRotation = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-        mSensorManager.registerListener(this, mSensorAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, mSensorRotation, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mSensorAcceleration, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(this, mSensorRotation, SensorManager.SENSOR_DELAY_UI);
 
         counter = 0;
         return  mBinder;
@@ -78,6 +88,7 @@ public class SensorReader extends Service
     public boolean onUnbind(Intent intent) {
         Log.d(TAG, "onUnbind is called");
         mSensorManager.unregisterListener(this);
+        mNotificationManager.cancel(NOTIFICATION);
         return false;
     }
 
@@ -153,7 +164,7 @@ public class SensorReader extends Service
          */
         private Queue<Float> readAccelerationByAxis(float sensorVal, Queue<Float> bufferQ) {
             if (bufferQ == null) {
-                bufferQ = new ArrayDeque<>(windowSize);
+                bufferQ = new ArrayDeque<>();
             }
             if (bufferQ.size() == windowSize) {
                 //save the existing buffer
@@ -161,6 +172,10 @@ public class SensorReader extends Service
                 for (Float buffVal : bufferQ) {
                     mBuffer.add(buffVal);
                 }
+                    if (mBuffer == null) {
+                        Log.d(TAG, "WHY IS THIS NuLL??");
+                    }
+
                 sensorData.add(mBuffer);
                 broadcastCounter++;
 //                readyToBroadcast();
@@ -216,7 +231,7 @@ public class SensorReader extends Service
                         .setSmallIcon(R.drawable.abc_btn_radio_material)
                         .setContentTitle("Project Reach")
                         .setContentText(text)
-                        .setWhen(System.currentTimeMillis());
+                .setWhen(System.currentTimeMillis());
 
         // The PendingIntent to launch our activity if the user selects this notification
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
@@ -225,6 +240,7 @@ public class SensorReader extends Service
 
         // Send the notification.
         mNotificationManager.notify(NOTIFICATION, mBuilder.build());
+
     }
 
 

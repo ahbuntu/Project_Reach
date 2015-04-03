@@ -150,11 +150,26 @@ public class MainActivity extends Activity {
             //expecting that size of values will always be 15
             ArrayList<WindowBuffer> sensorValues = intent.getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
 
-
-//            outputLogger.execute(sensorValues);
-            if (sensorValues.size() > 0) {
-                outputLogger.logValuesToFile(sensorValues);
+            for (WindowBuffer evalWindow : sensorValues) {
+                if (evalWindow  == null) {
+                    Log.d(TAG, "WHY IS THIS NuLL??");
+                }
             }
+
+//            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
+//            List<Float> meanFeatureList = FeatureExtractor.calculateMean(sensorValues);
+
+            outputLogger.logTemporalValuesToFile(sensorValues);
+
+//            ArrayList<Inte> sumSensorValues = new ArrayList<>();
+//            int length = sensorValues.get(0).getSensorValues().length;
+//            for (int i = 0; i < length; i++) {
+//
+//            }
+
+//            outputLogger.execute(sensorVa lues);
+//            if (sensorValues.size() > 0) {
+//            }
 
 //            List<Float> sensorMeanValues = FeatureExtractor.calculateMean(sensorValues);
 //            int idx = 0;
@@ -193,9 +208,10 @@ public class MainActivity extends Activity {
     private void startSensing() {
         if (!mIsBound) {
             prepareLogging(3); //x,y,z axis = 3
+//            prepareLogging(1); // x+y+z = 1 axis
 
             Intent intent = new Intent(this, SensorReader.class);
-            intent.putExtra("windowsize", 20); //pass windowsize in a bundle
+            intent.putExtra(Constants.ARG_WINDOW_SIZE, 20); //pass windowsize in a bundle
             this.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
             mIsBound = true;
             Toast.makeText(this, "Starting accelerometer data logging.", Toast.LENGTH_SHORT).show();
