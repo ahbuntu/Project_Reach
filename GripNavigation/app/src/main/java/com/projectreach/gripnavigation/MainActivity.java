@@ -1,7 +1,6 @@
 package com.projectreach.gripnavigation;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,18 +8,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.os.Parcelable;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.http.conn.scheme.Scheme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +53,14 @@ public class MainActivity extends Activity {
     };
 
 
+    private TextView textModelStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textModelStatus = (TextView) findViewById(R.id.text_active_model_status);
         Button button_Scheme1 = (Button) findViewById(R.id.button_scheme1);
         button_Scheme1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +120,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, WekaTest.class);
-                startActivity(intent);
+                startActivityForResult(intent, Globals.ACTIVE_MODEL_ASSIGNED);
             }
         });
 
@@ -130,7 +129,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        IntentFilter mIntentFilter = new IntentFilter(Constants.BROADCAST_ACTION);
+        IntentFilter mIntentFilter = new IntentFilter(Globals.BROADCAST_ACTION);
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, mIntentFilter);
     }
 
@@ -141,6 +140,26 @@ public class MainActivity extends Activity {
         stopSensing();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Globals.ACTIVE_MODEL_ASSIGNED) {
+            if (resultCode == RESULT_OK) {
+                String message = data.getStringExtra(Globals.ARG_ACTIVE_MODE);
+                if (message.isEmpty()) {
+                    //do nothing
+                } else {
+                    //test active model as sanity check
+                    Globals globalInstance = Globals.getInstance();
+                    if (globalInstance.getActiveModel() != null) {
+                        textModelStatus.setText(message);
+                    } else {
+                        Log.d(TAG, "SOMETHING VERY BAD happened");
+                    }
+                }
+            }
+        }
+    }
+
     private  BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -148,39 +167,46 @@ public class MainActivity extends Activity {
 
             //each list item corresponds to a sampling of 20 values for a single sensor value
             //expecting that size of values will always be 15
-            ArrayList<WindowBuffer> sensorValues = intent.getParcelableArrayListExtra(Constants.ARG_SENSOR_VAL);
+            ArrayList<WindowBuffer> sensorValues = intent.getParcelableArrayListExtra(Globals.ARG_SENSOR_VAL);
 
-            Log.d(TAG, "#values RECIVED = " + sensorValues.size());
-            for (WindowBuffer evalWindow : sensorValues) {
-                StringBuilder output = new StringBuilder();
-                if (evalWindow  == null) {
-                    Log.d(TAG, "WHY IS THIS NuLL??");
-                }
-                float[] evalArray = evalWindow.getSensorValues();
-                for (int i = 0; i < evalArray.length; i++) {
-                    output.append(evalArray[i]).append(",");
-                }
-                Log.d(TAG, "axis : " + output.toString());
-            }
+            Log.d(TAG, "#values RECEIVED = " + sensorValues.size());
 
-            outputLogger.logSingleLine("============ SUM ============");
-            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
-            for (float sums : sumFeatureList) {
-                Log.d(TAG, "axis sum: " + sums);
-            }
-            outputLogger.logFeatureValuesToFile(sumFeatureList);
+//            // ======= DETAILED DEBUGGING ========
+//            for (WindowBuffer evalWindow : sensorValues) {
+//                StringBuilder output = new StringBuilder();
+//                if (evalWindow  == null) {
+//                    Log.d(TAG, "WHY IS THIS NuLL??");
+//                }
+//                float[] evalArray = evalWindow.getSensorValues();
+//                for (int i = 0; i < evalArray.length; i++) {
+//                    output.append(evalArray[i]).append(",");
+//                }
+//                Log.d(TAG, "axis : " + output.toString());
+//            }
+//
+////            outputLogger.logSingleLine("============ SUM ============");
+//            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
+//            for (float sums : sumFeatureList) {
+//                Log.d(TAG, "axis sum: " + sums);
+//            }
+//            // ======= DETAILED DEBUGGING ========
 
-            outputLogger.logSingleLine("============ MEAN ============");
-            List<Float> meanFeatureList =  FeatureExtractor.calculateMean(sensorValues);
-            for (float means : meanFeatureList ) {
-                Log.d(TAG, "axis mean: " + means);
-            }
-            outputLogger.logFeatureValuesToFile(meanFeatureList );
+            // log values line by line
+            outputLogger.logTemporalValuesToFile(sensorValues);
+
+
+//            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
+//            outputLogger.logFeatureValuesToFile(sumFeatureList);
+
+//            outputLogger.logSingleLine("============ MEAN ============");
+//            List<Float> meanFeatureList =  FeatureExtractor.calculateMean(sensorValues);
+//            for (float means : meanFeatureList ) {
+//                Log.d(TAG, "axis mean: " + means);
+//            }
+//            outputLogger.logFeatureValuesToFile(meanFeatureList );
 
 //            List<Float> meanFeatureList = FeatureExtractor.calculateMean(sensorValues);
 
-            // log values line by line
-//            outputLogger.logTemporalValuesToFile(sensorValues);
 
 //            ArrayList<Inte> sumSensorValues = new ArrayList<>();
 //            int length = sensorValues.get(0).getSensorValues().length;
@@ -232,7 +258,7 @@ public class MainActivity extends Activity {
 //            prepareLogging(1); // x+y+z = 1 axis
 
             Intent intent = new Intent(this, SensorReader.class);
-            intent.putExtra(Constants.ARG_WINDOW_SIZE, 20); //pass windowsize in a bundle
+            intent.putExtra(Globals.ARG_WINDOW_SIZE, 20); //pass windowsize in a bundle
             this.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
             mIsBound = true;
             Toast.makeText(this, "Starting accelerometer data logging.", Toast.LENGTH_SHORT).show();

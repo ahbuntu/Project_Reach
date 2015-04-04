@@ -51,11 +51,10 @@ public class WekaTest extends ActionBarActivity
     private static final String WEKA_DIRECTORY = "GripNavigation_Weka";
     private static String fileName = "";
     private static String modelName = "";
-    private static Classifier activeModel = null;
 
     private TextView crossSummary;
     private WekaHelper wekaHelper = null;
-
+    Globals globalInstance = Globals.getInstance();
 
     private ArrayAdapter<String> mSavedModelAdapter;
     private AbsListView mListView;
@@ -181,17 +180,37 @@ public class WekaTest extends ActionBarActivity
         button_weka_evaluate_single.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (activeModel == null) {
+                if (globalInstance.getActiveModel() == null) {
                     Toast.makeText(WekaTest.this, "Load model first. ABORT!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(WekaTest.this, "Not setup yet. Need to hardcode actions!", Toast.LENGTH_SHORT).show();
-
-                    debugAndValidateModel();
+//                    debugAndValidateModel();
                 }
             }
         });
 
         //endregion
+    }
+
+    @Override
+    public void onBackPressed() {
+        String message = "";
+        if (globalInstance.getActiveModel() != null) {
+            message= textLoadModel.getText().toString() + " is active" ;
+        }
+
+        Intent intent=new Intent();
+        intent.putExtra(Globals.ARG_ACTIVE_MODE,message);
+        setResult(RESULT_OK,intent);
+        finish();//finishing activity
+
+        super.onBackPressed();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
     }
 
     //region local helper methods
@@ -249,7 +268,7 @@ public class WekaTest extends ActionBarActivity
             Log.d(TAG, "ruhroh");
             Toast.makeText(this, "Error while trying to load the model", Toast.LENGTH_SHORT).show();
         } else {
-            WekaTest.activeModel = model;
+            globalInstance.setActiveModel(model);
             Log.d(TAG, "retreived model: " + model.toString());
             Toast.makeText(this, "Model loaded", Toast.LENGTH_SHORT).show();
         }
@@ -423,7 +442,7 @@ public class WekaTest extends ActionBarActivity
             dataSet.add(single_window);
             single_window.setDataset(dataSet);
             // interpret as follows : 0.0 = tap, 1.0 = none
-            double result = activeModel.classifyInstance(single_window);
+            double result = globalInstance.getActiveModel().classifyInstance(single_window);
             Log.d(TAG, "classified as " + result);
             Toast.makeText(this, "Weka classified as : " + result, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
