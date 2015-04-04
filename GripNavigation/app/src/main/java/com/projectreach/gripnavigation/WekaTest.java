@@ -183,8 +183,23 @@ public class WekaTest extends ActionBarActivity
                 if (activeModel == null) {
                     Toast.makeText(WekaTest.this, "Load model first. ABORT!", Toast.LENGTH_SHORT).show();
                 } else {
-                    //create instance to be classified
-                    createAndTestInstance();
+                    Toast.makeText(WekaTest.this, "Not setup yet. Need to hardcode actions!", Toast.LENGTH_SHORT).show();
+//                    ============ DEBUGGING AND VALIDATION ============
+//                    create instance to be classified - for test.arff
+//                    createAndTestInstance();
+//
+//                    for SMO.arff
+//                    float[] testNone = {1.13964f,0.193978f,3.030102f,0.7588f,9.107543f,0.307998f};
+//                    float[] testTap = {4.866933f,1.255174f,3.074155f,0.835104f,7.464163f,9.7694f};
+//                    WindowClassifyInstance testInstance = new WindowClassifyInstance();
+//                    Instance test= testInstance.getAccInstance(testTap);
+//                    try {
+//                        double result = activeModel.classifyInstance(test);  // none=0.0  ; tap = 1.0
+//                        Toast.makeText(WekaTest.this, "Predicted value = " + result, Toast.LENGTH_SHORT).show();
+//                    } catch (Exception e) {
+//                        Log.d(TAG, "Exception : " + e.getMessage());
+//                    }
+//                    ============ DEBUGGING AND VALIDATION ============
                 }
             }
         });
@@ -271,7 +286,10 @@ public class WekaTest extends ActionBarActivity
 
     //endregion
 
-    public void createAndTestInstance() {
+    /**
+     * used strinctly for testing and validation purposes
+     */
+    private void createAndTestInstance() {
         try {
             // Declare the numeric attributes
             Attribute t1 = new Attribute("t1");
@@ -394,9 +412,5 @@ public class WekaTest extends ActionBarActivity
             Log.d(TAG, "like you're really suprised");
             e.printStackTrace();
         }
-    }
-    private class WindowClassify {
-
-
     }
 }
