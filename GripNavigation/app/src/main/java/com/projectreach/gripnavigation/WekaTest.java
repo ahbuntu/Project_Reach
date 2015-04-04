@@ -116,6 +116,7 @@ public class WekaTest extends ActionBarActivity
     protected void onResume() {
         super.onResume();
 
+        //region button onClickListener implementations
         Button button_weka_crossvalidate = (Button) findViewById(R.id.button_weka_crossvalidate);
         button_weka_crossvalidate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,26 +185,16 @@ public class WekaTest extends ActionBarActivity
                     Toast.makeText(WekaTest.this, "Load model first. ABORT!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(WekaTest.this, "Not setup yet. Need to hardcode actions!", Toast.LENGTH_SHORT).show();
-//                    ============ DEBUGGING AND VALIDATION ============
-//                    create instance to be classified - for test.arff
-//                    createAndTestInstance();
-//
-//                    for SMO.arff
-//                    float[] testNone = {1.13964f,0.193978f,3.030102f,0.7588f,9.107543f,0.307998f};
-//                    float[] testTap = {4.866933f,1.255174f,3.074155f,0.835104f,7.464163f,9.7694f};
-//                    WindowClassifyInstance testInstance = new WindowClassifyInstance();
-//                    Instance test= testInstance.getAccInstance(testTap);
-//                    try {
-//                        double result = activeModel.classifyInstance(test);  // none=0.0  ; tap = 1.0
-//                        Toast.makeText(WekaTest.this, "Predicted value = " + result, Toast.LENGTH_SHORT).show();
-//                    } catch (Exception e) {
-//                        Log.d(TAG, "Exception : " + e.getMessage());
-//                    }
-//                    ============ DEBUGGING AND VALIDATION ============
+
+                    debugAndValidateModel();
                 }
             }
         });
+
+        //endregion
     }
+
+    //region local helper methods
 
     /**
      * generates the name of the model based on the provided filename
@@ -222,7 +213,7 @@ public class WekaTest extends ActionBarActivity
      * Checks if external storage is available for read and write
      *
      * */
-    public boolean isExternalStorageWritable() {
+    private boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
             return true;
@@ -230,7 +221,7 @@ public class WekaTest extends ActionBarActivity
         return false;
     }
 
-    public File getWekaDirectory(String dirName) {
+    private File getWekaDirectory(String dirName) {
         // Get the directory for the public documents directory.
         File file = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOCUMENTS), dirName);
@@ -239,6 +230,10 @@ public class WekaTest extends ActionBarActivity
         }
         return file;
     }
+
+    //endregion
+
+    //region callbacks from WekaHelper
 
     @Override
     public void onWekaModelCrossValidated(String summary){
@@ -259,6 +254,9 @@ public class WekaTest extends ActionBarActivity
             Toast.makeText(this, "Model loaded", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //endregion
+
     //region options menu
 
     @Override
@@ -267,7 +265,6 @@ public class WekaTest extends ActionBarActivity
         getMenuInflater().inflate(R.menu.menu_weka_test, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -286,6 +283,27 @@ public class WekaTest extends ActionBarActivity
 
     //endregion
 
+    //region debugging and validation
+
+    private void debugAndValidateModel() {
+//                    ============ DEBUGGING AND VALIDATION ============
+//                    create instance to be classified - for test.arff
+//                    createAndTestInstance();
+//
+//                    for SMO.arff
+//                    float[] testNone = {1.13964f,0.193978f,3.030102f,0.7588f,9.107543f,0.307998f};
+//                    float[] testTap = {4.866933f,1.255174f,3.074155f,0.835104f,7.464163f,9.7694f};
+//                    WindowClassifyInstance testInstance = new WindowClassifyInstance();
+//                    Instance test= testInstance.getAccInstance(testTap);
+//                    try {
+//                        double result = activeModel.classifyInstance(test);  // none=0.0  ; tap = 1.0
+//                        Toast.makeText(WekaTest.this, "Predicted value = " + result, Toast.LENGTH_SHORT).show();
+//                    } catch (Exception e) {
+//                        Log.d(TAG, "Exception : " + e.getMessage());
+//                    }
+//                    ============ DEBUGGING AND VALIDATION ============
+
+    }
     /**
      * used strinctly for testing and validation purposes
      */
@@ -413,4 +431,6 @@ public class WekaTest extends ActionBarActivity
             e.printStackTrace();
         }
     }
+
+    //endregion
 }
