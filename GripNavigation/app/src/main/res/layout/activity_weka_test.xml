@@ -39,11 +39,25 @@
                     android:layout_weight="1"/>
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <Button android:id="@+id/button_weka_crossvalidate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Crossvalidate WEKA model"
+                android:layout_weight="1"
                 />
+
+            <Button android:id="@+id/button_weka_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save model"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
 
             <TextView android:text="Cross Validation Summary"
                 android:textStyle="bold"
@@ -56,19 +70,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 
-
-            <Button android:id="@+id/button_weka_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Save WEKA model"
-                />
-
-            <Button android:id="@+id/button_weka_load"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Load WEKA model"
-                />
-
             <TextView android:text="Saved Weka Models"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -78,8 +79,33 @@
 
             <ListView android:id="@+id/list_saved_models"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|bottom" />
+                android:orientation="horizontal">
+                <TextView android:id="@+id/text_load_model"
+                    android:text="No model selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button android:id="@+id/button_weka_load"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load WEKA model"
+                    android:layout_weight="1"
+                    />
+                </LinearLayout>
+
+            <Button android:id="@+id/button_weka_evaluate_single"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Evaluate single window"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                />
+
         </LinearLayout>
 
         </ScrollView>
