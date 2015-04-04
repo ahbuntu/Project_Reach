@@ -84,7 +84,8 @@ public class LogOutputWriter extends AsyncTask<List<WindowBuffer>, Integer, Inte
                 }
                 float[] sensorValues = sensorWindow.getSensorValues();
                 for (int i = 0; i < sensorValues.length; i++) {
-                    outputLine.append( (int) (sensorValues[i]*100)).append(",");
+//                    outputLine.append( (int) (sensorValues[i]*100)).append(",");
+                    outputLine.append( (sensorValues[i])).append(",");
                 }
 
                 outputLine.append(System.currentTimeMillis());

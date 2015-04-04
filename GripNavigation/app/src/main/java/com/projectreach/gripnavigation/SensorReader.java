@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -63,7 +62,7 @@ public class SensorReader extends Service
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "onStartCommand called");
-        windowSize = intent.getIntExtra(Constants.ARG_WINDOW_SIZE, 20);
+        windowSize = intent.getIntExtra(Globals.ARG_WINDOW_SIZE, 20);
         Log.d(TAG, "sliding window size = " + windowSize);
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.
@@ -122,8 +121,8 @@ public class SensorReader extends Service
     private void readyToBroadcast() {
         ArrayList<WindowBuffer> dataToSend = new ArrayList<>(sensorData);
         Intent intent = new Intent();
-        intent.setAction(Constants.BROADCAST_ACTION);
-        intent.putParcelableArrayListExtra(Constants.ARG_SENSOR_VAL, (ArrayList<WindowBuffer>) dataToSend);
+        intent.setAction(Globals.BROADCAST_ACTION);
+        intent.putParcelableArrayListExtra(Globals.ARG_SENSOR_VAL, (ArrayList<WindowBuffer>) dataToSend);
 
         Log.d(TAG, "#values SENT = " + dataToSend.size());
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
