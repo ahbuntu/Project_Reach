@@ -33,7 +33,9 @@ public class MainActivity extends Activity {
     //log to file
     LogOutputWriter outputLogger = null;
     private int logOutBufferSize = 100 ;
-    private List<WindowBuffer> logOutBuffer = new ArrayList<>(logOutBufferSize * 16);
+
+    private static int axisSize = 3; //TODO: these need to be configurable
+    private static int windowSize = 20; //TODO: these need to be configurable
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -171,7 +173,40 @@ public class MainActivity extends Activity {
 
             Log.d(TAG, "#values RECEIVED = " + sensorValues.size());
 
+            // log values line by line
+//            outputLogger.logTemporalValuesToFile(sensorValues);
+
+            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
+            List<Float> meanFeatureList = FeatureExtractor.calculateMean(sensorValues);
+            List<Float> varianceFeatureList = FeatureExtractor.calculateVariance(sensorValues);
+
+            float[] featureBuffer = new float[MainActivity.axisSize * 3]; //features are sum, mean, variance
+            int idx = 0;
+            for (int i=0; i < MainActivity.axisSize; i++) {
+                //iterating over each axis
+                featureBuffer[idx++] = sumFeatureList.get(i); //sum
+                featureBuffer[idx++] = meanFeatureList.get(i); //mean
+                featureBuffer[idx++] = varianceFeatureList.get(i); //variance
+
+            }
+
+
 //            // ======= DETAILED DEBUGGING ========
+//            StringBuilder output = new StringBuilder();
+//            for (WindowBuffer axisBuffer : sensorValues) {
+//                float[] lines = axisBuffer.getSensorValues();
+//                for (int i = 0; i < lines.length; i++) {
+//                    output.append(lines[i]).append(",");
+//                }
+//                Log.d(TAG, "Window temporal: " + output.toString());
+//            }
+//
+//            output = new StringBuilder();
+//            for (int i = 0; i < featureBuffer.length; i++) {
+//                output.append(featureBuffer[i]).append(",");
+//            }
+//            Log.d(TAG, "Window features: " + output.toString());
+
 //            for (WindowBuffer evalWindow : sensorValues) {
 //                StringBuilder output = new StringBuilder();
 //                if (evalWindow  == null) {
@@ -191,39 +226,7 @@ public class MainActivity extends Activity {
 //            }
 //            // ======= DETAILED DEBUGGING ========
 
-            // log values line by line
-            outputLogger.logTemporalValuesToFile(sensorValues);
 
-
-//            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
-//            outputLogger.logFeatureValuesToFile(sumFeatureList);
-
-//            outputLogger.logSingleLine("============ MEAN ============");
-//            List<Float> meanFeatureList =  FeatureExtractor.calculateMean(sensorValues);
-//            for (float means : meanFeatureList ) {
-//                Log.d(TAG, "axis mean: " + means);
-//            }
-//            outputLogger.logFeatureValuesToFile(meanFeatureList );
-
-//            List<Float> meanFeatureList = FeatureExtractor.calculateMean(sensorValues);
-
-
-//            ArrayList<Inte> sumSensorValues = new ArrayList<>();
-//            int length = sensorValues.get(0).getSensorValues().length;
-//            for (int i = 0; i < length; i++) {
-//
-//            }
-
-//            outputLogger.execute(sensorVa lues);
-//            if (sensorValues.size() > 0) {
-//            }
-
-//            List<Float> sensorMeanValues = FeatureExtractor.calculateMean(sensorValues);
-//            int idx = 0;
-//            for (Float sensorMean : sensorMeanValues) {
-//                Log.d(TAG, "Sensor" +idx+ " mean : " + sensorMean);
-//                idx++;
-//            }
         }
     };
 
@@ -258,7 +261,7 @@ public class MainActivity extends Activity {
 //            prepareLogging(1); // x+y+z = 1 axis
 
             Intent intent = new Intent(this, SensorReader.class);
-            intent.putExtra(Globals.ARG_WINDOW_SIZE, 20); //pass windowsize in a bundle
+            intent.putExtra(Globals.ARG_WINDOW_SIZE, windowSize); //pass windowsize in a bundle
             this.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
             mIsBound = true;
             Toast.makeText(this, "Starting accelerometer data logging.", Toast.LENGTH_SHORT).show();
