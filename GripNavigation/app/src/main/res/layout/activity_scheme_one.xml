@@ -2,8 +2,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF"
     android:id="@+id/layout_scheme_one">
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -12,77 +12,22 @@
         android:src="@drawable/navigation_bar"
         android:scaleType="fitXY"/>
 
-    <LinearLayout
+
+    <!--<ImageView-->
+    <com.projectreach.gripnavigation.SchemeOverlayImageView
+        android:id="@+id/image_scheme1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_height="match_parent"
+        android:background="#ff99cc"
+        android:scaleType="fitXY"/>
+    <!--android:layout_width="385dp"-->
+    <!--android:layout_height="545dp"-->
+    <!--android:src="@drawable/scheme1"-->
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:hint="Search"
-            android:id="@+id/textView2"
-            android:layout_weight="1"/>
-
-        <SearchView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchView"
-            />
-    </LinearLayout>
-    <Button android:id="@+id/dummy_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dummy_button"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="40dip"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="@dimen/abc_action_bar_icon_vertical_padding_material"
-        android:layout_marginRight="@dimen/abc_action_bar_icon_vertical_padding_material">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:src="@drawable/maps_homescreen"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView3"
-            android:src="@drawable/facebook_homescreen"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView4"
-            android:src="@drawable/foursquare_homescreen"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView5"
-            android:src="@drawable/music_homescreen"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dummy_button"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="200dp"/>
-    <!--style="?metaButtonBarButtonStyle"-->
+    <!--<Button android:id="@+id/dummy_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/dummy_button"-->
+    <!--/>-->
 
 </LinearLayout>
