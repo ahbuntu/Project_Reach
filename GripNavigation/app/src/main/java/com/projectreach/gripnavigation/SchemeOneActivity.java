@@ -75,6 +75,42 @@ public class SchemeOneActivity extends Activity
         imageUI.invalidate();
     }
 
+    @Override
+    protected  void onResume() {
+        super.onResume();
+//        Button buttonStart = (Button) findViewById(R.id.dummy_button);
+//        buttonStart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                resizeLayout();
+//            }
+//        });
+}
+
+    /*
+     * Callback from region overlay when tapped
+     */
+    @Override
+    public void onTap(float x, float y) {
+        //Are we near a region?
+        mPointIdx = imageUI.findPointIndex(x, y);
+
+        imageUI.clearSelection();
+        if(mPointIdx != -1) {
+            //Found a close region, visually mark it
+            imageUI.addSelection(mPointIdx);
+        }
+        imageUI.invalidate(); //Re-draw
+    }
+
+    private void resizeLayout() {
+        layoutUI = (LinearLayout) (findViewById(R.id.layout_scheme_one));
+        SlidingLayout layoutAnim = new SlidingLayout(layoutUI);
+        layoutAnim.setDuration(ANIM_DURATION);
+        layoutUI.startAnimation(layoutAnim);
+    }
+
+
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
                                                          int reqWidth, int reqHeight) {
 
@@ -113,41 +149,7 @@ public class SchemeOneActivity extends Activity
 
         return inSampleSize;
     }
-    @Override
-    protected  void onResume() {
-        super.onResume();
-//        Button buttonStart = (Button) findViewById(R.id.dummy_button);
-//        buttonStart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                resizeLayout();
-//            }
-//        });
-    }
 
-    /*
-     * Callback from region overlay when tapped
-     */
-    @Override
-    public void onTap(float x, float y) {
-
-//            //Are we near a region?
-//            mPointIdx = imageUI.findPointIndex(x, y);
-//
-//            imageUI.clearSelection();
-//            if(mPointIdx != -1) {
-//                //Found a close region, visually mark it
-//                imageUI.addSelection(mPointIdx);
-//            }
-        imageUI.invalidate(); //Re-draw
-    }
-
-    private void resizeLayout() {
-        layoutUI = (LinearLayout) (findViewById(R.id.layout_scheme_one));
-        SlidingLayout layoutAnim = new SlidingLayout(layoutUI);
-        layoutAnim.setDuration(ANIM_DURATION);
-        layoutUI.startAnimation(layoutAnim);
-    }
     class SlidingLayout extends Animation
     {
         private int mViewHeight;
@@ -185,6 +187,8 @@ public class SchemeOneActivity extends Activity
         public boolean willChangeBounds() {
             return true;
         }
+
+
 
     }
 }

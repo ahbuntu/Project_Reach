@@ -28,7 +28,7 @@ public class SchemeOverlayImageView extends ImageView {
     private List<ActionPoint> mPointList;
     private Set<Integer> mSelection;
     private static float mSelectionMargin = 1.25f;
-    private static float mDiameterImgFrac = 0.15f;
+    private static float mDiameterImgFrac = 0.05f;
 
     private RectF imagePos = new RectF();
 
@@ -103,7 +103,7 @@ public class SchemeOverlayImageView extends ImageView {
         mCirclePaint.setColor(Color.RED);
         DashPathEffect dashPathEffect = new DashPathEffect(new float[]{5,5}, 0.0f);
         mCirclePaint.setPathEffect(dashPathEffect);
-        mCirclePaint.setStyle(Paint.Style.STROKE);
+        mCirclePaint.setStyle(Paint.Style.FILL);
         mCirclePaint.setStrokeWidth(5);
 
         mSelectedPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
