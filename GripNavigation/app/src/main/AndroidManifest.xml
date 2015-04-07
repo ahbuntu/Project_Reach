@@ -26,11 +26,11 @@
         </activity>
         <activity
             android:name=".SchemeOneActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
             android:name=".SchemeTwoActivity"
-            android:label="@string/title_activity_scheme_two" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
             android:name=".RFduinoActivity"
