@@ -17,9 +17,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import weka.classifiers.Classifier;
+import weka.core.Instance;
 
 
 public class MainActivity extends Activity {
@@ -36,6 +40,13 @@ public class MainActivity extends Activity {
 
     private static int axisSize = 3; //TODO: these need to be configurable
     private static int windowSize = 20; //TODO: these need to be configurable
+
+    Globals globalInstance = Globals.getInstance();
+    private static Classifier modelClassifier;
+    private TextView textModelStatus;
+
+    private boolean enableTemporalLogging = false;
+    private boolean enableWindowLogging = false;
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -54,8 +65,6 @@ public class MainActivity extends Activity {
         }
     };
 
-
-    private TextView textModelStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,24 +182,41 @@ public class MainActivity extends Activity {
 
             Log.d(TAG, "#values RECEIVED = " + sensorValues.size());
 
-            // log values line by line
-//            outputLogger.logTemporalValuesToFile(sensorValues);
+            if (enableTemporalLogging) {
+                outputLogger.logTemporalValuesToFile(sensorValues); // log values line by line
+            }
 
-            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
+//            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
             List<Float> meanFeatureList = FeatureExtractor.calculateMean(sensorValues);
             List<Float> varianceFeatureList = FeatureExtractor.calculateVariance(sensorValues);
 
-            float[] featureBuffer = new float[MainActivity.axisSize * 3]; //features are sum, mean, variance
+//            float[] featureBuffer = new float[MainActivity.axisSize * 3]; //features are sum, mean, variance
+            float[] featureBuffer = new float[MainActivity.axisSize * 2]; //features are mean, variance
             int idx = 0;
             for (int i=0; i < MainActivity.axisSize; i++) {
                 //iterating over each axis
-                featureBuffer[idx++] = sumFeatureList.get(i); //sum
+//                featureBuffer[idx++] = sumFeatureList.get(i); //sum
                 featureBuffer[idx++] = meanFeatureList.get(i); //mean
                 featureBuffer[idx++] = varianceFeatureList.get(i); //variance
-
             }
 
+            Instance classificationInstance = new WindowClassifyInstance().getAccInstance(featureBuffer);
+            try {
+                double prediction = modelClassifier.classifyInstance(classificationInstance);
+                StringBuilder output = new StringBuilder();
+                for (int i = 0; i < featureBuffer.length; i++) {
+                    output.append(featureBuffer[i]).append(",");
+                }
+                output.append(prediction).append(",").append(System.currentTimeMillis());
 
+                if (enableWindowLogging) {
+                    outputLogger.logSingleLine(output.toString()); // Log.d(TAG, "WEKA window: " + output.toString());
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d(TAG, "hey somethinge went wrong here");
+            }
 //            // ======= DETAILED DEBUGGING ========
 //            StringBuilder output = new StringBuilder();
 //            for (WindowBuffer axisBuffer : sensorValues) {
@@ -256,6 +282,13 @@ public class MainActivity extends Activity {
      * starts the service to log sensor data
      */
     private void startSensing() {
+        if (globalInstance.getActiveModel() == null) {
+            Toast.makeText(this, "Please load a model before staring the sensor service.", Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        } else {
+            modelClassifier = globalInstance.getActiveModel();
+        }
         if (!mIsBound) {
             prepareLogging(3); //x,y,z axis = 3
 //            prepareLogging(1); // x+y+z = 1 axis
@@ -279,6 +312,27 @@ public class MainActivity extends Activity {
             ceaseLogging();
         }
     }
+
+    public void onToggleTemporalClicked(View view) {
+        // Is the toggle on?
+        boolean on = ((ToggleButton) view).isChecked();
+        if (on) {
+            enableTemporalLogging = true;
+        } else {
+            enableTemporalLogging = false;
+        }
+    }
+
+    public void onToggleWindowClicked(View view) {
+        // Is the toggle on?
+        boolean on = ((ToggleButton) view).isChecked();
+        if (on) {
+            enableWindowLogging = true;
+        } else {
+            enableWindowLogging = false;
+        }
+    }
+
 
     //region OptionsMenu implementation
 
