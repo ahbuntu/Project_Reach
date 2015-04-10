@@ -30,6 +30,34 @@ public class Globals {
         NONE, GRIP, REACH
     }
 
+    public enum Tap_Pattern {
+        NONE, MOTION, TAP
+    }
+
+    public static Tap_Pattern tapAsEnum(double val) {
+        if (val == 0.0) {
+            return Tap_Pattern.NONE;
+        } else if (val == 1.0) {
+            return Tap_Pattern.MOTION;
+        } else if (val == 2.0) {
+            return Tap_Pattern.TAP;
+        } else {
+            return Tap_Pattern.NONE;
+        }
+    }
+
+    public static float tapAsFloat(Tap_Pattern val) {
+        if (val == Tap_Pattern.NONE) {
+            return 0.0f;
+        } else if (val == Tap_Pattern.MOTION) {
+            return 1.0f;
+        } else if (val == Tap_Pattern.TAP) {
+            return 2.0f;
+        } else {
+            return 0.0f;
+        }
+    }
+
     public Classifier getActiveModel() {
         return Globals.activeModel;
     }

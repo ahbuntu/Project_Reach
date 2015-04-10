@@ -26,7 +26,8 @@ import weka.classifiers.Classifier;
 import weka.core.Instance;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+                            implements TapEvaluation.TapEvaluatedListener{
 
     private static final String TAG = "MainActivity";
 
@@ -42,8 +43,11 @@ public class MainActivity extends Activity {
     private static int windowSize = 20; //TODO: these need to be configurable
 
     Globals globalInstance = Globals.getInstance();
+    TapEvaluation tapEvaluator = TapEvaluation.getInstance();
     private static Classifier modelClassifier;
     private TextView textModelStatus;
+    private TextView textTapCounter;
+    private int tapCounter = 0;
 
     private boolean enableTemporalLogging = false;
     private boolean enableWindowLogging = false;
@@ -72,6 +76,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         textModelStatus = (TextView) findViewById(R.id.text_active_model_status);
+        textTapCounter = (TextView) findViewById(R.id.text_tap_evaluated);
         Button button_Scheme1 = (Button) findViewById(R.id.button_scheme1);
         button_Scheme1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,6 +208,10 @@ public class MainActivity extends Activity {
             Instance classificationInstance = new WindowClassifyInstance().getAccInstance(featureBuffer);
             try {
                 double prediction = modelClassifier.classifyInstance(classificationInstance);
+                Globals.Tap_Pattern predictedTap = Globals.tapAsEnum(prediction);
+                tapEvaluator.evaluateIfTap(predictedTap);
+
+                //========= LOGGING work BEGIN ===========
                 StringBuilder output = new StringBuilder();
                 for (int i = 0; i < featureBuffer.length; i++) {
                     output.append(featureBuffer[i]).append(",");
@@ -212,6 +221,7 @@ public class MainActivity extends Activity {
                 if (enableWindowLogging) {
                     outputLogger.logSingleLine(output.toString()); // Log.d(TAG, "WEKA window: " + output.toString());
                 }
+                //========= LOGGING work END ===========
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -256,6 +266,12 @@ public class MainActivity extends Activity {
         }
     };
 
+    @Override
+    public void onTapEvaluated() {
+        tapCounter++;
+        textTapCounter.setText(tapCounter + " taps");
+    }
+
     /**
      * creates the log file and opens it for writing
      *
@@ -288,6 +304,7 @@ public class MainActivity extends Activity {
             return;
         } else {
             modelClassifier = globalInstance.getActiveModel();
+            tapEvaluator.registerTapEvaluatedListener(this);
         }
         if (!mIsBound) {
             prepareLogging(3); //x,y,z axis = 3
