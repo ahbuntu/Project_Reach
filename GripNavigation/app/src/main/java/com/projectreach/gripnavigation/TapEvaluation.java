@@ -18,7 +18,7 @@ public class TapEvaluation {
 
     private static TapEvaluation instance;
 
-    private static int evaluationWindow = 25;
+    private static int evaluationWindow = 30;
     private static Queue<Float> evaluationQueue;
 
     //restrict the constructor from being initialized
@@ -62,16 +62,16 @@ public class TapEvaluation {
             }
         }
 
-//        if ((numPredictedTap > numPredictedMotion) || (numPredictedTap > numPredictedNone)) {
-        //TODO: replace with previous line when BayesNet model is being used
+//        int tapPredictionThresh = (int) (0.5 * evaluationWindow);
+//        if (numPredictedTap > tapPredictionThresh) {
         if (numPredictedMotion > numPredictedNone) {
             //TAP!!!
+            //flush entire queue
+            evaluationQueue.clear();
             Log.d(TAG, "TAP detected");
             if (mListener != null) {
                 mListener.onTapEvaluated();
             }
-            //flush entire queue
-            evaluationQueue.clear();
         } else {
             evaluationQueue.remove(); //remove the first/oldest element
         }

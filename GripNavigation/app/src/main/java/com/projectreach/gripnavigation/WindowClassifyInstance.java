@@ -34,7 +34,7 @@ public class WindowClassifyInstance {
         Attribute classAttribute = new Attribute("theClass", fvClassVal);
 
         // Declare the feature vector
-        FastVector fvWekaAttributes = new FastVector(4);
+        FastVector fvWekaAttributes = new FastVector(7);
 
         fvWekaAttributes.addElement(x_mean);
         fvWekaAttributes.addElement(x_var);
@@ -43,6 +43,32 @@ public class WindowClassifyInstance {
         fvWekaAttributes.addElement(z_mean);
         fvWekaAttributes.addElement(z_var);
         fvWekaAttributes.addElement(classAttribute);
+
+//        // Declare the numeric attributes
+//        Attribute x_var = new Attribute("var_x");
+//        Attribute x_var_delta = new Attribute("delta_var_x");
+//        Attribute y_var = new Attribute("var_y");
+//        Attribute y_var_delta = new Attribute("delta_var_y");
+//        Attribute z_var = new Attribute("var_z");
+//        Attribute z_var_delta = new Attribute("delta_var_z");
+//
+//        // Declare the class attribute along with its values
+//        FastVector fvClassVal = new FastVector(3);
+//        fvClassVal.addElement("none");
+//        fvClassVal.addElement("motion");
+//        fvClassVal.addElement("tap");
+//        Attribute classAttribute = new Attribute("theClass", fvClassVal);
+
+//        // Declare the feature vector
+//        FastVector fvWekaAttributes = new FastVector(7);
+//
+//        fvWekaAttributes.addElement(x_var);
+//        fvWekaAttributes.addElement(x_var_delta);
+//        fvWekaAttributes.addElement(y_var);
+//        fvWekaAttributes.addElement(y_var_delta);
+//        fvWekaAttributes.addElement(z_var);
+//        fvWekaAttributes.addElement(z_var_delta);
+//        fvWekaAttributes.addElement(classAttribute);
 
         return fvWekaAttributes;
     }

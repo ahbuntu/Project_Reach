@@ -176,6 +176,7 @@ public class MainActivity extends Activity
         }
     }
 
+    List<Float> prevVarianceFeatureList = null;
     private  BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -193,16 +194,29 @@ public class MainActivity extends Activity
 
 //            List<Float> sumFeatureList =  FeatureExtractor.calculateSum(sensorValues);
             List<Float> meanFeatureList = FeatureExtractor.calculateMean(sensorValues);
-            List<Float> varianceFeatureList = FeatureExtractor.calculateVariance(sensorValues);
+            List<Float> currVarianceFeatureList = FeatureExtractor.calculateVariance(sensorValues);
+//            List<Float> deltaVarianceFeatureList = new ArrayList<>();
+//            if (prevVarianceFeatureList == null) {
+//                prevVarianceFeatureList = currVarianceFeatureList;
+//                deltaVarianceFeatureList.add(0f); //x-axis
+//                deltaVarianceFeatureList.add(0f); //y-axis
+//                deltaVarianceFeatureList.add(0f); //z-axis
+//            } else {
+//                deltaVarianceFeatureList.add(currVarianceFeatureList.get(0) - prevVarianceFeatureList.get(0));
+//                deltaVarianceFeatureList.add(currVarianceFeatureList.get(1) - prevVarianceFeatureList.get(1));
+//                deltaVarianceFeatureList.add(currVarianceFeatureList.get(2) - prevVarianceFeatureList.get(2));
+//            }
 
 //            float[] featureBuffer = new float[MainActivity.axisSize * 3]; //features are sum, mean, variance
             float[] featureBuffer = new float[MainActivity.axisSize * 2]; //features are mean, variance
+//            float[] featureBuffer = new float[MainActivity.axisSize * 2]; //features are variance, delta_variance
             int idx = 0;
             for (int i=0; i < MainActivity.axisSize; i++) {
                 //iterating over each axis
 //                featureBuffer[idx++] = sumFeatureList.get(i); //sum
                 featureBuffer[idx++] = meanFeatureList.get(i); //mean
-                featureBuffer[idx++] = varianceFeatureList.get(i); //variance
+                featureBuffer[idx++] = currVarianceFeatureList.get(i); //variance
+//                featureBuffer[idx++] = deltaVarianceFeatureList.get(i); //delta_variance
             }
 
             Instance classificationInstance = new WindowClassifyInstance().getAccInstance(featureBuffer);

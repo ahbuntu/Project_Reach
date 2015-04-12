@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.IntBuffer;
+import java.util.Arrays;
 import java.util.UUID;
 
 
@@ -108,9 +110,15 @@ public class RFduinoActivity extends Activity implements BluetoothAdapter.LeScan
             } else if (RFduinoService.ACTION_DATA_AVAILABLE.equals(action)) {
 //                addData(intent.getByteArrayExtra(RFduinoService.EXTRA_DATA));
                 ByteBuffer buffer = ByteBuffer.wrap(intent.getByteArrayExtra(RFduinoService.EXTRA_DATA)).order(ByteOrder.LITTLE_ENDIAN);
-                float val = buffer.getFloat();
-                Log.d(TAG, String.valueOf(intent.getByteArrayExtra(RFduinoService.EXTRA_DATA)));
-                Log.d(TAG, String.valueOf(val));
+//                float val = buffer.getFloat();
+//                Log.d(TAG, String.valueOf(val));
+                byte[] rfduinoBytes = buffer.array();
+                String stringRepresentation = Arrays.toString(rfduinoBytes);
+//                Log.d(TAG, String.valueOf(intent.getByteArrayExtra(RFduinoService.EXTRA_DATA)));
+                Log.d(TAG, stringRepresentation);
+
+                byte bVal = buffer.get();
+//                bVal.
             }
         }
     };
