@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 #        <empty>, <event_iteration>, <timestamp>, <sensor_type>, <axis>, <value>
 def parseRawDataSet(inputfile, sensorType, windowSize, axis):
   tapTotal = 250
-  noneTotal = 250
-  motionTotal = 0
+  noneTotal = 5000
+  motionTotal = 1500
   fin = open(inputfile, 'r')
   outputfile = 'weka_dataset.csv'
   print("Output file is " + outputfile)
