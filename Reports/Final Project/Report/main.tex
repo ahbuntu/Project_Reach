@@ -147,23 +147,26 @@ Zahid Abul-Basher\\
 
 \keywords{Data analytics}
 
-\section{Introduction}
-There is an unprecedented rise in popularity of large screen mobile phones with screen sizes greater than 5 inches. The benefits of larger screens and a larger battery life being the primary drivers of user adoption, however, these larger devices are difficult if not impossible to use with one hand and pose usability issues for demographics with smaller hands (especially women). The existing solutions to this include on screen functions that the user can activate to bring the screen content closer to the user's thumb. These methods however, introduce extra steps in the user's interaction with the device and can be cumbersome. We propose ``Project Reach''.
-\par
-By placing force sensors all around the rim of the phone, we can sense how the user is holding the phone and when they are straining their thumb to reach a corner. Using this information we can shift the UI closer to the operating finger. The force sensors can also be used to interact with the phone in other scenarios, for example swiping on the sides of the phone could scroll pages, or increase/decrees volume etc. With this project we intend to build the hardware, formulate UI design changes, and do basic user testing to validate our ideas.
-\section{Related Work}
-Many researchers have suggested that the devices should be intelligent enough to detect user's situation for better support as in \cite{Johnson:1998:UMIM} and \cite{Schmidt:1999:AIC}. For instance, \emph{ability based design} aims to find the best match between the ability of the users and the interfaces \cite{Wobbrock:2011:adcpe}. There are also researches to recognize the activity of users on devices (also known as \emph{activity recognition}). Choudhuri \emph{et al.} \cite{Choudhury:2008:MSP} built a wearable device with sensors to detect the activity of the users. In \cite{Van:2000:WhatShallWe}, Laerhoven used an accelerometer in a phone to recognize different motions of walking, climbing stairs, \emph{etc}. Schmidt \emph{et al.} \cite{Schmidt:1999:advanced} also used accelerometer but to detect both the user movement and the place of the device itself whether it is in the hand or on a table or in a suitcase. GripSense \cite{Goel:2012:gripsense} used gyroscope and vibration motor to classify the user's touches based on the pressure on the screen. There is also many studies in the context of detecting hand postures. Harrison \emph{et al.} \cite{harrison:1998:squeeze} and Kim \emph{et al.} \cite{kim:2006:hand} used touch sensors to detect the pattern of user's grips on mobiles. Furthermore, Taylor and Bove \cite{taylor:2009:graspables} used accelerometers to improve the detection of the changes in the grip dynamically. Researchers also leveraged the  
 
-REACH falls in this research area by detecting the activity of the user from the pressure that they apply on mobile devices.
-\par
+%=============================================================================
+% CONTENT
+%=============================================================================
 
-
+\input{intro}		% Introduction
+\input{relate}		% Related Work
+\input{design}	    % Design
+\input{eval}		% Evaluation
+\input{conc}		% Conclusions
 
 
 %\end{document}  % This is where a 'short' article might terminate
 
 
-%
+
+%=============================================================================
+% BIBLIOGRAPHY
+%=============================================================================
+
 % The following two commands are all you need in the
 % initial runs of your .tex file to
 % produce the bibliography for the citations in your paper.
