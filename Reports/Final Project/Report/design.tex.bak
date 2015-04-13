@@ -1,0 +1,9 @@
+\section{Design of REACH}
+
+\subsection{Hardware design of REACH}
+
+
+\subsection{Building the Grip Classifier}
+In addition to the hardware implementations by selecting appropriate force sensors and locating them in the appropriate places around the mobile device, we also build the classifier for the hand grip. In this section, we discuss how we collect force sensor values from mobile device for training and how we implement the classifier for grip pattern detection. We then used the model to predict the pattern in realtime manner. 
+\par
+We selected three grip pattern classes in REACH: Hold, Squeeze, and Reach. In Hold, the subject holds the device without any activity on device. In Squeeze, the subject is applying the squeeze-type force on the device and in Reach, the subject is moving his thumb finger to reach the top of the device.    
