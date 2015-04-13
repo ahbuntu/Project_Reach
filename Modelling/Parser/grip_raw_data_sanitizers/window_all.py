@@ -234,8 +234,8 @@ def parseRawDataSet(inputfile, sensorType, windowSize, axis):
   interval = 20
   inputfileCols = inputfile.split('.')
   fin = open(inputfile, 'r')
-  outputfile = inputfileCols[0] + '_windowed_all.csv'
-  feature_out_file = inputfileCols[0] + '_featured.csv'
+  outputfile = inputfileCols[0] + '_windowed_' + str(windowSize) +'.csv'
+  feature_out_file = inputfileCols[0] + '_featured_window_'+ str(windowSize) +'.csv'
   print("Output file is " + outputfile)
   print("Feature output file is " + feature_out_file)
   fout = open(outputfile, 'w')
