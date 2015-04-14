@@ -19,6 +19,9 @@ Picking the right window size is crucial since it has a direct impact on the acc
 Upon observing the data, it was noticed that acceleration values of the x, y and z axis all changed when the tap action was performed. The \textit{inter}-window change was captured by calculating the \textit{mean} for a window, and this was used as one of the features for training the model. There was a visible change in the acceleration values within the window duration, and this \textit{intra}-window change was represented by calculating the \textit{variance} of a window. 
 
 \subsubsection{Classify a Tap}
+Even though a windowing principle was used, windows clustered near a tap duration all show a similar characteristic pattern, albeit time-shifted. Therefore while performing the manual classification of the training data, we decided to label, on average, 20 windows as a single tap. This means that when a tap is being evaluated with real-time data, we would expect 20 back-to-back windows all to be predicted as a tap. Once such a scenario is detected, we would report a successful tap as being detected.
+
+\subsubsection{Tap Model Performance}
 
 \subsection{Grip Classifier}
 We selected three grip pattern classes in our prototype: None, Squeeze, and Reach. In None, the subject holds the device without performing any activity. In Squeeze, the subject is applying a squeeze-force on the device and in Reach, the subject is moving his thumb finger to reach the top of the device while holding the device. After we identified the grip pattern classes, we collected the training data from 1 subject. The individual was asked to perform Hold, Squeeze, and Reach every 15 seconds for a duration of 1 minute. This process was repeated 3 times. 
