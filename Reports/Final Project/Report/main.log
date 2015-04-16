@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.2.3)  16 APR 2015 15:05
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.2.3)  16 APR 2015 18:05
 entering extended mode
 **E:/GitHub/Project_Reach/Reports/Final*Project/Report/main.tex
 ("E:/GitHub/Project_Reach/Reports/Final Project/Report/main.tex"
@@ -359,18 +359,27 @@ Package pdftex.def Info: Block_Design.png used on input line 4.
  <E:/GitHub/Project_Reach/Reports/Final Project/Report/Block_Design.png>])
 ("E:\GitHub\Project_Reach\Reports\Final Project\Report\hardware_design.tex")
 ("E:\GitHub\Project_Reach\Reports\Final Project\Report\software_design.tex")
-("E:\GitHub\Project_Reach\Reports\Final Project\Report\eval.tex")
-("E:\GitHub\Project_Reach\Reports\Final Project\Report\conc.tex")
+("E:\GitHub\Project_Reach\Reports\Final Project\Report\eval.tex"
+<window_60.png, id=14, 361.35pt x 216.81pt>
+File: window_60.png Graphic file (type png)
+ <use window_60.png>
+Package pdftex.def Info: window_60.png used on input line 5.
+(pdftex.def)             Requested size: 226.79846pt x 136.07823pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) ("E:\GitHub\Project_Reach\Reports\Final Project\Report\conc.tex")
 ("E:\GitHub\Project_Reach\Reports\Final Project\Report\main.bbl" [2]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-) [3]
+) [3 <E:/GitHub/Project_Reach/Reports/Final Project/Report/window_60.png>]
 ("E:\GitHub\Project_Reach\Reports\Final Project\Report\main.aux") ) 
 Here is how much of TeX's memory you used:
- 5231 strings out of 493921
- 74316 string characters out of 3147274
- 157196 words of memory out of 3000000
- 8435 multiletter control sequences out of 15000+200000
+ 5237 strings out of 493921
+ 74415 string characters out of 3147274
+ 157204 words of memory out of 3000000
+ 8440 multiletter control sequences out of 15000+200000
  50665 words of font info for 67 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  41i,10n,38p,1560b,260s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -383,9 +392,9 @@ msfonts/cm/cmti9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb
 gram Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX
  2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
 urw/times/utmri8a.pfb>
-Output written on main.pdf (3 pages, 146068 bytes).
+Output written on main.pdf (3 pages, 152305 bytes).
 PDF statistics:
- 46 PDF objects out of 1000 (max. 8388607)
+ 47 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
