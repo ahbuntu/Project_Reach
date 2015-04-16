@@ -1,5 +1,9 @@
 \section{Evaluation}
 
 \subsection{Off-line Evaluation}
-
+\begin{figure}[h]
+\includegraphics[width=.45\textwidth]{window_60.png}
+\caption{Sensor value changes for window size 60}
+\label{fig:window_60}
+\end{figure}
 \subsection{Realtime Evaluation}

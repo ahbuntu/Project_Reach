@@ -22,7 +22,22 @@ Upon observing the data, it was noticed that acceleration values of the x, y and
 Even though a windowing principle was used, windows clustered near a tap duration all show a similar characteristic pattern, albeit time-shifted. Therefore while performing the manual classification of the training data, we decided to label, on average, 20 windows as a single tap. This means that when a tap is being evaluated with real-time data, we would expect 20 back-to-back windows all to be predicted as a tap. Once such a scenario is detected, we would report a successful tap as being detected.
 
 \subsubsection{Tap Model Performance}
+We collected acceleration values of the x, y, and z dimension of three different activities on the mobile: \emph{None}, \emph{Motion}, and \emph{Tap}. The mean and variance of each window for each dimension is then calculated and are used as instance features for training a model. The Motion activity is added to represent the boundary between Tap and None activities.  The corresponding activity of each window is labeled manually (\emph{i.e.}, None, Motion, and Tap) and used as class feature for training a model. 
+\par
+We used Bayesian network, Naive bayes and Support vector machine algorithms with Weka's default configuration for training. We also used different number of instances with different ratios between class features. In all cases, Bayesian network was the winner among other algorithms. Table \ref{tbl-Confusion Matrix} shows the confusion matrix of using Bayesian network algorithm with 10-fold cross validation of 2250 instances (among them are 1000 None, 1000 Motion, and 250 None instances). The matrix shows that 76 of Tap activities are classified as Motion which is reasonable due to the similarity between these two activities. While 142 of Motion activities are classified as None, we believe that these are the instances which exist in the boundaries between Motion and None activities.
 
+\begin{table}[!t]
+\begin{center}
+\caption{Confusion Matrix using Bayesian network with 10-fold cross validation}
+\label{tbl-Confusion Matrix}
+\begin{tabular}{|l||l|l|l|}\hline
+        & None   & Motion   & Tap   \\ \hline \hline
+None    & 970    &	29      & 1	    \\
+Motion  & 142    &	825     & 33    \\
+Tap     & 1      &	76      & 173	\\ \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 
 
