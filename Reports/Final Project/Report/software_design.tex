@@ -39,15 +39,20 @@ Tap     & 1      &	76      & 173	\\ \hline
 \end{center}
 \end{table}
 
-
-
-
-
-
 \subsection{Grip Classifier}
-We selected three grip pattern classes in our prototype: None, Squeeze, and Reach. In None, the subject holds the device without performing any activity. In Squeeze, the subject is applying a squeeze-force on the device and in Reach, the subject is moving his thumb finger to reach the top of the device while holding the device. After we identified the grip pattern classes, we collected the training data from 1 subject. The individual was asked to perform Hold, Squeeze, and Reach every 15 seconds for a duration of 1 minute. This process was repeated 3 times.
+We used the insights gained from tap detection to guide our grip classification process, namely a sliding window evaluation protocol and similar features to describe a grip pattern. We begin by attempting to classify three grip patterns in our prototype: None, Squeeze, and Reach. In None, the subject holds the device without performing any activity. In Squeeze, the subject is applying a squeeze-force on the device and in Reach, the subject is moving his thumb finger to reach the top of the device while holding the device.  
 \par
-The 12 force sensors around the device continuously reported data every 1 ms on average. The logged information was then calculated  and we calculated three metrics; mean, variance, and delta variance as features to train a classifier model. Therefore, the training data from each grip consists from **** numerical values and the final data consists from **** numerical values for each grip pattern.
+The 12 force sensors around the device continuously reported data every 1 ms on average. Based on our experience with tap detection, we felt that these values could be safely aggregated into a 20ms sampling interval for the purpose of grip detection. Figure \ref{fig:window_60} shows the change in a sensors value for a \textit{window size} of 60. We can clearly see that choosing a value of 20 would result in the loss of essential information, while a value of 60 would admit noisy data. It was determined that a \textit{window size} of 50 represents the average case.
 
+\begin{figure}[h]
+\includegraphics[width=.45\textwidth]{window_60.png}
+\caption{Sensor value changes for window size 60}
+\label{fig:window_60}
+\end{figure}
 
+\par
+Similar to tap detection, we calculated the mean and variance for each \textit{sliding window}. It was observed that different people perform the same gesture in slightly different ways. To increase the robustness of the trained model, we decided to use the mean values of all the sensors located on one side of the device. The variance for each sensor was calculated with respect to these averaged means. For each window the following features were calculated -\textit{mean left}, \textit{mean right} and \textit{variance} for each sensor.
+
+\subsubsection{Variability of Grip Patterns}
+We wanted to establish a good baseline performance for grip pattern detection, which led us to collect all training and evaluation data from 1 subject. The individual was asked to perform Hold, Squeeze and Reach every 15 seconds for a duration of 1 minute. Each dataset collected involved repeating this process  3 times. We noticed that even for the same individual, subsequent datasets resulted in a variability of the grip patterns. The model that was trained for the first dataset performed poorly for the second dataset. However, when the second dataset was used to train the model, cross-validation performance was very similar to the original dataset. We will explore the performance further in the Evaluation section.  
 

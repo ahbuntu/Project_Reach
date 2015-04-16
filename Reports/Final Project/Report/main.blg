@@ -1,7 +1,50 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
 The style file: abbrv.bst
 Database file #1: sigproc.bib
 Warning--empty institution in Karlson:2006:usm
 Warning--can't use both volume and number fields in kim:2006:hand
 Warning--empty journal in Strachan:2004:MTI
+You've used 20 entries,
+            2118 wiz_defined-function locations,
+            633 strings with 8025 characters,
+and the built_in function-call counts, 8865 in all, are:
+= -- 882
+> -- 408
+< -- 15
++ -- 163
+- -- 140
+* -- 582
+:= -- 1340
+add.period$ -- 63
+call.type$ -- 20
+change.case$ -- 130
+chr.to.int$ -- 0
+cite$ -- 23
+duplicate$ -- 383
+empty$ -- 695
+format.name$ -- 140
+if$ -- 1959
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 19
+newline$ -- 103
+num.names$ -- 40
+pop$ -- 152
+preamble$ -- 1
+purify$ -- 109
+quote$ -- 0
+skip$ -- 324
+stack$ -- 0
+substring$ -- 561
+swap$ -- 157
+text.length$ -- 15
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 80
+warning$ -- 3
+while$ -- 85
+width$ -- 22
+write$ -- 231
 (There were 3 warnings)
