@@ -24,10 +24,14 @@ Even though a windowing principle was used, windows clustered near a tap duratio
 \subsubsection{Tap Model Performance}
 
 \subsection{Grip Classifier}
-We selected three grip pattern classes in our prototype: None, Squeeze, and Reach. In None, the subject holds the device without performing any activity. In Squeeze, the subject is applying a squeeze-force on the device and in Reach, the subject is moving his thumb finger to reach the top of the device while holding the device. After we identified the grip pattern classes, we collected the training data from 1 subject. The individual was asked to perform Hold, Squeeze, and Reach every 15 seconds for a duration of 1 minute. This process was repeated 3 times. 
+We used the insights gained from tap detection to guide our grip classification process. We begin by attempting to classify three grip patterns in our prototype: None, Squeeze, and Reach. In None, the subject holds the device without performing any activity. In Squeeze, the subject is applying a squeeze-force on the device and in Reach, the subject is moving his thumb finger to reach the top of the device while holding the device.  
 \par
-The 12 force sensors around the device continuously reported data every 1 ms on average. The logged information was then calculated  and we calculated three metrics; mean, variance, and delta variance as features to train a classifier model. Therefore, the training data from each grip consists from **** numerical values and the final data consists from **** numerical values for each grip pattern.
+The 12 force sensors around the device continuously reported data every 1 ms on average. Based on our experience with tap detection, we felt that these values could be safely aggregated into a 20ms sampling interval for the purpose of grip detection. The figure below %Zahid please include the figure%
+shows the change in a sensors value for a \textit{window size} of 60. We can clearly see that choosing a value of 20 would result in the loss of valuable information, while a value of 60 would admit noisy data. It was determined that a \textit{window size} of 50 represents the average case.
 
+ The logged information was then calculated  and we calculated three metrics; mean, variance, and delta variance as features to train a classifier model. Therefore, the training data from each grip consists from **** numerical values and the final data consists from **** numerical values for each grip pattern.
 
+\subsubsection{Variability of Training Data}
+After we identified the grip pattern classes, we collected the training data from 1 subject. The individual was asked to perform Hold, Squeeze, and Reach every 15 seconds for a duration of 1 minute. This process was repeated 3 times.
 
     
