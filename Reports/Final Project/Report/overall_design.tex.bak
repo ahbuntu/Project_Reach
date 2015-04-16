@@ -1,0 +1,7 @@
+\section{Overall Design of REACH}
+The design of REACH involves three distinct phases - building the hardware to collect and transmit force sensor data, performing offline analysis to train a classification model and finally performing real-time evaluations to detect grip patterns and perform a corresponding action.
+\begin{figure}
+\includegraphics[width=.45\textwidth]{Block_Design.png}
+\caption{Design of REACH}
+\label{fig:Design of REACH}
+\end{figure}
