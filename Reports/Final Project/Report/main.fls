@@ -173,11 +173,11 @@ INPUT hardware_design.tex
 INPUT hardware_design.tex
 INPUT software_design.tex
 INPUT software_design.tex
+INPUT /usr/local/texlive/2014/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
+INPUT /usr/local/texlive/2014/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT window_60.png
 INPUT ./window_60.png
 INPUT ./window_60.png
-INPUT /usr/local/texlive/2014/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
-INPUT /usr/local/texlive/2014/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT eval.tex
 INPUT eval.tex
 INPUT conc.tex

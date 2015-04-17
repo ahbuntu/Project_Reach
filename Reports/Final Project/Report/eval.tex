@@ -1,16 +1,38 @@
 \section{Evaluation}
+Our initial goal of having the grip classification being performed in real-time on the device was abandoned due to time constraints. Therefore we focused our evaluation criteria on how accurately the grip patterns could be identified. While training the model, we performed a 10-fold cross-validation that provides insight into the model's performance. 
+
+\subsection{Model Evaluation}
+Table \ref{tbl-Grip Model Eval} demonstrates shows the performance of the model when trained with two datasets, and two algorithms - SMO and BayesNet. As expected the prediction accuracy when a larger dataset is used. However, it should also result in a more robust model since the larger dataset contains slightly different reach gestures.
+This indicates that the presence of a large training dataset should result in the robustness 
+
+\begin{table}[!t]
+\caption{Grip model cross validation accuracy with multiple datasets}
+\label{tbl-Grip Model Eval}
+\begin{tabular}{lllllll}
+        & \multicolumn{3}{c}{initial dataset} & \multicolumn{3}{c}{expanded dataset} \\
+        & count     & SVM        & Bayes      & count     & SVM        & Bayes    \\
+None    & 13751     & 99.4\%     & 98.8\%     & 20773     & 99.6\%     & 99.1\%      \\
+Squeeze & 871       & 97.0\%     & 99.7\%     & 871       & 95.5\%     & 97.5\%      \\
+Reach   & 679       & 97.9\%     & 99.3\%     & 1361      & 94.0\%     & 95.6\%     
+\end{tabular}
+\end{table}
+
+It was determined that the best performance achieved by a model for the expanded dataset was using the J48 tree classifier, as shown in  Table \ref{tbl-Grip Model J48}
+
+\begin{table}[!t]
+\caption{J48 Grip model cross-validation Confusion Matrix}
+\label{tbl-Grip Model J48}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+        & total & None  & Squeeze & Reach & Correct \\ \hline
+None    & 20773 & 20729 & 9       & 35    & 99.8\%  \\ \hline
+Squeeze & 871   & 9     & 855     & 7     & 98.2\%  \\ \hline
+Reach   & 1361  & 16    & 4       & 1341  & 98.5\%  \\ \hline
+\end{tabular}
+\end{table}
+
 
 \subsection{Off-line Evaluation}
-<<<<<<< HEAD
-
-\begin{figure}[h]
-\includegraphics[width=.45\textwidth]{window_60.png}
-\caption{Sensor value changes for window size 60}
-\label{fig:window_60}
-\end{figure}
-
-
-=======
-This indicates that the presence of a large training dataset should result in the robustness 
->>>>>>> origin/master
-\subsection{Realtime Evaluation}
+We decided to use the J48 tree grip detection model since it produced the best cross-validation results. Since we are not performing real-time evaluation, we first record our evaluation dataset in a similar manner to the training dataset - generating a log of the sensor values as the user performs the squeeze and reach gestures. This dataset is then parsed to generate the sliding windows and extract the features. 
+\par
+We wrote a simple Java program running on a laptop that would load the J48 grip classification model, read the features of each window and ask the model to classify it as None, Squeeze or Reach gesture. Without looking at the predictions for each window, we classified each window manually. The accuracy of the 
