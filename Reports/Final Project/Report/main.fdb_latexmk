@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex main"] 1429232823 "main.aux" "main.bbl" "main" 1429232827
+["bibtex main"] 1429247498 "main.aux" "main.bbl" "main" 1429247819
   "/usr/local/texlive/2014/texmf-dist/bibtex/bst/base/abbrv.bst" 1292289607 20329 b5fed53e10044d0f8112183785c759b1 ""
-  "main.aux" 1429232826 3900 8b673f08bfcb0c1e277ddf0cae533380 ""
+  "main.aux" 1429247817 4268 1bfa258cf5659f293ab662df079f5f1f ""
   "main.bcf" 0 -1 0 ""
   "sigproc.bib" 1428027649 6348 7971288500e2f1ac5c67bc7a87982c87 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1429232824 "main.tex" "main.pdf" "main" 1429232827
+["pdflatex"] 1429247815 "main.tex" "main.pdf" "main" 1429247819
   "/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2014/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/tfm/adobe/helvetic/phvb8r.tfm" 1136768653 4484 b828043cbd581d289d955903c1339981 ""
@@ -115,16 +115,18 @@
   "/usr/local/texlive/2014/texmf.cnf" 1401025936 577 a59edbde8d3a8c549d0eeaab1739e2ff ""
   "Block_Design.png" 1429196815 20295 a256bab0949e9ba7037c6ca94731ec88 ""
   "conc.tex" 1429034557 39 f3e44c262f2f92d6ef482909a6600b94 ""
-  "eval.tex" 1429232816 2799 991b4c78fbda0a81d404d9ec3a86b2f0 ""
+  "eval.tex" 1429247808 3638 b6a4e1ec5fe6a894de65524d07b2ebb2 ""
   "hardware_design.tex" 1429045486 35 0db1681e8d1a14de6a66cecd98672040 ""
   "intro.tex" 1429034557 23 0724ce7a131568ad239c1aac91dfb03b ""
-  "main.aux" 1429232826 3900 8b673f08bfcb0c1e277ddf0cae533380 ""
-  "main.bbl" 1429232824 5155 9b5e0105bd7e6d1525556ffec37ed815 "bibtex main"
+  "main.aux" 1429247817 4268 1bfa258cf5659f293ab662df079f5f1f ""
+  "main.bbl" 1429247499 5155 9b5e0105bd7e6d1525556ffec37ed815 "bibtex main"
   "main.tex" 1429046561 6917 a211c50d0b0a4fe88ce56f7ca5529a9f ""
   "overall_design.tex" 1429196815 1056 ad498a3d8518f8f369c15d3df153a6b8 ""
+  "reach_eval.png" 1429246831 36388 d4b7aab030c98b1b70e8003d033fbe12 ""
   "relate.tex" 1429034557 3234 29c11c12997875971a1f6a496f4d6119 ""
   "sig-alternate.cls" 1427588346 58095 3c82fd28fb22c25d8dc5facd718fcbbf ""
   "software_design.tex" 1429215830 8685 7cd42b9184edc05105669f8654620fdb ""
+  "squeeze_eval.png" 1429246831 36461 e5848b4458e1fc9ad074334730cb03a3 ""
   "window_60.png" 1429197685 6926 27142277e2a0647d76f9ccc2ac86aa42 ""
   (generated)
   "main.log"

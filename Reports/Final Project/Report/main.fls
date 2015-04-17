@@ -180,6 +180,12 @@ INPUT ./window_60.png
 INPUT ./window_60.png
 INPUT eval.tex
 INPUT eval.tex
+INPUT reach_eval.png
+INPUT ./reach_eval.png
+INPUT ./reach_eval.png
+INPUT squeeze_eval.png
+INPUT ./squeeze_eval.png
+INPUT ./squeeze_eval.png
 INPUT conc.tex
 INPUT conc.tex
 INPUT main.bbl
