@@ -1,7 +1,7 @@
 \section{Software Design of REACH}
 In addition to the hardware implementation by selecting appropriate force sensors and locating them in the appropriate places around the mobile device, we also build the classifier for the hand grip. In this section, we discuss how we collect force sensor values from mobile device for training and how we implement the classifier for grip pattern detection. We then used the model to predict the pattern in realtime manner.
 \par
-For training the model,  we used the Weka (Witten \& Frank 2005) machine learning library for Java. We used Bayesian network, Naive Bayes and Support vector machine machine algorithms for training the model on the collected data. We performed off-line training on a laptop and extracted the parameters of the best model to implement the realtime version of REACH.
+For training the model,  we used the Weka (Witten \& Frank 2005) machine learning library for Java. We used Bayesian network, Support vector machine and Classification tree algorithms for training the model on the collected data. We performed off-line training on a laptop and extracted the parameters of the best model to implement the realtime version of REACH.
 
 \subsection{Tap Detection as Proxy}
 While waiting for the hardware to be completed, we decided to perform some experiments to provide insight into how to  classify the grip patterns. Tap detection was chosen as a proxy for grip pattern detection. We used the accelerometer data available from an Android phone to try and classify instances when a user performs a single tap on the back of the device.

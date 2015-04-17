@@ -36,7 +36,8 @@ Reach   & 1361  & 16    & 4       & 1341  & 98.5\%  \\ \hline
 We decided to use the J48 tree grip detection model since it produced the best cross-validation results. Since we are not performing real-time evaluation, we first record our evaluation dataset in a manner similar to the training dataset - generating a log of the sensor values as the user performs the squeeze and reach gestures. This dataset is then parsed to generate the sliding windows and extract the features. 
 \par
 We wrote a simple Java program running on a laptop that would load the J48 grip classification model, read the features of each window and ask the model to classify it as None, Squeeze or Reach gesture. Without looking at the predictions for each window, we classified each window manually. Figure \ref{fig:reach_eval} and Figure \ref{fig:squeeze_eval} displays a comparison of the predicted and actual window classifications for Reach and Squeeze grips, respectively. The average difference between the classifications was 2\% on average, with a maximum of 6\%, for both types of gestures.
-
+\par
+Similar to tap detection, a gesture is detected when 50 consecutive windows are classified as the same. It was observed that the misclassified windows all tended to be at the beginning or the end of each gesture duration. For each of the Squeeze or Reach gestures, there was always a set 50 consecutive windows that were correctly classified. This means that the gestures were detected with 100\% accuracy.
 
 \begin{figure}[h]
 \includegraphics[width=.45\textwidth]{reach_eval.png}
