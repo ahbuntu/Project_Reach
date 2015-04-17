@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  17 APR 2015 15:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  17 APR 2015 15:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -383,28 +383,28 @@ Overfull \hbox (18.89441pt too wide) in paragraph at lines 136--136
  []\eaddfnt ahmadul.hassan@gmail.com| 
  []
 
-(./intro.tex) (./relate.tex) (./overall_design.tex [1{/usr/local/texlive/2014/t
-exmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(./intro.tex) (./relate.tex [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdft
+ex/updmap/pdftex.map}
 
 
-]
-<Block_Design.png, id=14, 819.06pt x 281.05pt>
-File: Block_Design.png Graphic file (type png)
- <use Block_Design.png>
-Package pdftex.def Info: Block_Design.png used on input line 4.
+]) (./overall_design.tex
+<Block_Design_ahmad.png, id=14, 819.06pt x 281.05pt>
+File: Block_Design_ahmad.png Graphic file (type png)
+
+<use Block_Design_ahmad.png>
+Package pdftex.def Info: Block_Design_ahmad.png used on input line 6.
 (pdftex.def)             Requested size: 226.79846pt x 77.82289pt.
-)
-(./hardware_design.tex <hardware_setup.png, id=15, 626.34pt x 145.54375pt>
+) (./hardware_design.tex
+<hardware_setup.png, id=15, 626.34pt x 145.54375pt>
 File: hardware_setup.png Graphic file (type png)
-
-<use hardware_setup.png>
+ <use hardware_setup.png>
 Package pdftex.def Info: hardware_setup.png used on input line 5.
 (pdftex.def)             Requested size: 226.79846pt x 52.70216pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./software_design.tex [2 <./Block_Design.png> <./hardware_setup.png>]
+) (./software_design.tex [2 <./Block_Design_ahmad.png> <./hardware_setup.png>]
 <window_60.png, id=19, 361.35pt x 216.81pt>
 File: window_60.png Graphic file (type png)
  <use window_60.png>
@@ -412,14 +412,14 @@ Package pdftex.def Info: window_60.png used on input line 48.
 (pdftex.def)             Requested size: 226.79846pt x 136.07823pt.
 ) (./eval.tex
 [3 <./window_60.png>]
-Overfull \hbox (9.82835pt too wide) in paragraph at lines 10--18
+Overfull \hbox (11.62836pt too wide) in paragraph at lines 10--17
 [][] 
  []
 
 <reach_eval.png, id=23, 361.35pt x 216.81pt>
 File: reach_eval.png Graphic file (type png)
  <use reach_eval.png>
-Package pdftex.def Info: reach_eval.png used on input line 43.
+Package pdftex.def Info: reach_eval.png used on input line 42.
 (pdftex.def)             Requested size: 226.79846pt x 136.07823pt.
 
 
@@ -428,7 +428,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <squeeze_eval.png, id=25, 361.04887pt x 217.41225pt>
 File: squeeze_eval.png Graphic file (type png)
  <use squeeze_eval.png>
-Package pdftex.def Info: squeeze_eval.png used on input line 50.
+Package pdftex.def Info: squeeze_eval.png used on input line 49.
 (pdftex.def)             Requested size: 226.79846pt x 136.56902pt.
 
 
@@ -448,8 +448,8 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 png>] (./main.aux) ) 
 Here is how much of TeX's memory you used:
  5648 strings out of 493117
- 81182 string characters out of 6135433
- 172591 words of memory out of 5000000
+ 81212 string characters out of 6135433
+ 173591 words of memory out of 5000000
  8985 multiletter control sequences out of 15000+600000
  50665 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -464,7 +464,7 @@ r/local/texlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local
 e/2014/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/tex
 mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fo
 nts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (5 pages, 590651 bytes).
+Output written on main.pdf (5 pages, 589250 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  41 compressed objects within 1 object stream

@@ -3,9 +3,7 @@
 \bibitem{Azenkot:2012:TBD}
 S.~Azenkot and S.~Zhai.
 \newblock Touch behavior with different postures on soft smartphone keyboards.
-\newblock In {\em Proceedings of the 14th International Conference on
-  Human-computer Interaction with Mobile Devices and Services}, MobileHCI '12,
-  pages 251--260, 2012.
+\newblock MobileHCI '12, pages 251--260, 2012.
 
 \bibitem{Choudhury:2008:MSP}
 T.~Choudhury, S.~Consolvo, B.~Harrison, J.~Hightower, A.~LaMarca, L.~LeGrand,
@@ -16,8 +14,7 @@ T.~Choudhury, S.~Consolvo, B.~Harrison, J.~Hightower, A.~LaMarca, L.~LeGrand,
 \bibitem{Fitzmaurice:1995:BLF}
 G.~W. Fitzmaurice, H.~Ishii, and W.~A.~S. Buxton.
 \newblock Bricks: Laying the foundations for graspable user interfaces.
-\newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
-  Computing Systems}, CHI '95, pages 442--449, 1995.
+\newblock CHI '95, pages 442--449, 1995.
 
 \bibitem{Goel:2012:gripsense}
 M.~Goel, J.~Wobbrock, and S.~Patel.
@@ -30,8 +27,7 @@ M.~Goel, J.~Wobbrock, and S.~Patel.
 S.~Gupta, T.~Campbell, J.~R. Hightower, and S.~N. Patel.
 \newblock Squeezeblock: Using virtual springs in mobile devices for eyes-free
   interaction.
-\newblock In {\em Proceedings of the 23Nd Annual ACM Symposium on User
-  Interface Software and Technology}, UIST '10, pages 101--104, 2010.
+\newblock UIST '10, pages 101--104, 2010.
 
 \bibitem{harrison:1998:squeeze}
 B.~L. Harrison, K.~P. Fishkin, A.~Gujar, C.~Mochon, and R.~Want.
@@ -43,14 +39,12 @@ B.~L. Harrison, K.~P. Fishkin, A.~Gujar, C.~Mochon, and R.~Want.
 \bibitem{Hinckley:2011:SST}
 K.~Hinckley and H.~Song.
 \newblock Sensor synaesthesia: Touch in motion, and motion in touch.
-\newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
-  Computing Systems}, CHI '11, pages 801--810, 2011.
+\newblock CHI '11, pages 801--810, 2011.
 
 \bibitem{Holz:2011:UT}
 C.~Holz and P.~Baudisch.
 \newblock Understanding touch.
-\newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
-  Computing Systems}, CHI '11, pages 2501--2510, 2011.
+\newblock CHI '11, pages 2501--2510, 2011.
 
 \bibitem{Johnson:1998:UMIM}
 P.~Johnson.
@@ -67,8 +61,7 @@ A.~K. Karlson and B.~B. Bederson.
 A.~K. Karlson, B.~B. Bederson, and J.~SanGiovanni.
 \newblock Applens and launchtile: Two designs for one-handed thumb use on small
   devices.
-\newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
-  Computing Systems}, CHI '05, pages 201--210, 2005.
+\newblock CHI '05, pages 201--210, 2005.
 
 \bibitem{kim:2006:hand}
 K.-E. Kim, W.~Chang, S.-J. Cho, J.~Shim, H.~Lee, J.~Park, Y.~Lee, and S.~Kim.
@@ -80,13 +73,12 @@ K.-E. Kim, W.~Chang, S.-J. Cho, J.~Shim, H.~Lee, J.~Park, Y.~Lee, and S.~Kim.
 A.~Schmidt, K.~A. Aidoo, A.~Takaluoma, U.~Tuomela, K.~V. Laerhoven, and
   W.~V.~d. Velde.
 \newblock Advanced interaction in context.
-\newblock In {\em Proceedings of the 1st International Symposium on Handheld
-  and Ubiquitous Computing}, HUC '99, pages 89--101, 1999.
+\newblock HUC '99, pages 89--101, 1999.
 
 \bibitem{Strachan:2004:MTI}
 S.~Strachan and R.~Murray-Smith.
 \newblock Muscle tremor as an input mechanism.
-\newblock 2004.
+\newblock UIST '04, 2004.
 
 \bibitem{taylor:2009:graspables}
 B.~T. Taylor and V.~M. Bove~Jr.
@@ -103,14 +95,12 @@ K.~Van~Laerhoven and O.~Cakmakci.
 \bibitem{Weberg:2001:PBP}
 L.~Weberg, T.~Brange, and A.~W. Hansson.
 \newblock A piece of butter on the pda display.
-\newblock In {\em CHI '01 Extended Abstracts on Human Factors in Computing
-  Systems}, CHI EA '01, pages 435--436, 2001.
+\newblock CHI EA '01, pages 435--436, 2001.
 
 \bibitem{Wimmer:2010:FGS}
 R.~Wimmer.
 \newblock Flyeye: Grasp-sensitive surfaces using optical fiber.
-\newblock In {\em Proceedings of the Fourth International Conference on
-  Tangible, Embedded, and Embodied Interaction}, TEI '10, pages 245--248, 2010.
+\newblock TEI '10, pages 245--248, 2010.
 
 \bibitem{Wobbrock:2011:adcpe}
 J.~O. Wobbrock, S.~K. Kane, K.~Z. Gajos, S.~Harada, and J.~Froehlich.

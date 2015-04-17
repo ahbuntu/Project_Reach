@@ -3,48 +3,57 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: abbrv.bst
 Database file #1: sigproc.bib
+Warning--empty booktitle in Azenkot:2012:TBD
+Warning--empty booktitle in Fitzmaurice:1995:BLF
+Warning--empty booktitle in Gupta:2010:SUV
+Warning--empty booktitle in Hinckley:2011:SST
+Warning--empty booktitle in Holz:2011:UT
 Warning--empty institution in Karlson:2006:usm
+Warning--empty booktitle in Karlson:2005:ALT
 Warning--can't use both volume and number fields in kim:2006:hand
-Warning--empty journal in Strachan:2004:MTI
+Warning--empty booktitle in Schmidt:1999:AIC
+Warning--empty booktitle in Strachan:2004:MTI
+Warning--empty booktitle in Weberg:2001:PBP
+Warning--empty booktitle in Wimmer:2010:FGS
 You've used 20 entries,
             2118 wiz_defined-function locations,
-            633 strings with 8025 characters,
-and the built_in function-call counts, 8865 in all, are:
-= -- 882
+            628 strings with 7583 characters,
+and the built_in function-call counts, 8822 in all, are:
+= -- 874
 > -- 408
 < -- 15
 + -- 163
 - -- 140
-* -- 582
-:= -- 1340
+* -- 574
+:= -- 1332
 add.period$ -- 63
 call.type$ -- 20
 change.case$ -- 130
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 383
-empty$ -- 695
+cite$ -- 32
+duplicate$ -- 377
+empty$ -- 686
 format.name$ -- 140
-if$ -- 1959
+if$ -- 1942
 int.to.chr$ -- 0
 int.to.str$ -- 20
 missing$ -- 19
 newline$ -- 103
 num.names$ -- 40
-pop$ -- 152
+pop$ -- 162
 preamble$ -- 1
 purify$ -- 109
 quote$ -- 0
-skip$ -- 324
+skip$ -- 325
 stack$ -- 0
 substring$ -- 561
-swap$ -- 157
+swap$ -- 149
 text.length$ -- 15
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 80
-warning$ -- 3
+warning$ -- 12
 while$ -- 85
 width$ -- 22
-write$ -- 231
-(There were 3 warnings)
+write$ -- 223
+(There were 12 warnings)

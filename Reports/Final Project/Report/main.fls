@@ -138,8 +138,6 @@ INPUT intro.tex
 INPUT relate.tex
 INPUT relate.tex
 INPUT /usr/local/texlive/2014/texmf-dist/fonts/tfm/public/ae/aeti9.tfm
-INPUT overall_design.tex
-INPUT overall_design.tex
 OUTPUT main.pdf
 INPUT /usr/local/texlive/2014/texmf-dist/fonts/vf/adobe/helvetic/phvb8t.vf
 INPUT /usr/local/texlive/2014/texmf-dist/fonts/tfm/adobe/helvetic/phvb8r.tfm
@@ -166,9 +164,11 @@ INPUT /usr/local/texlive/2014/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT /usr/local/texlive/2014/texmf-dist/fonts/vf/public/ae/aeti9.vf
 INPUT /usr/local/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmti9.tfm
 INPUT /usr/local/texlive/2014/texmf-dist/fonts/tfm/public/cm/cmsl9.tfm
-INPUT Block_Design.png
-INPUT ./Block_Design.png
-INPUT ./Block_Design.png
+INPUT overall_design.tex
+INPUT overall_design.tex
+INPUT Block_Design_ahmad.png
+INPUT ./Block_Design_ahmad.png
+INPUT ./Block_Design_ahmad.png
 INPUT hardware_design.tex
 INPUT hardware_design.tex
 INPUT hardware_setup.png
