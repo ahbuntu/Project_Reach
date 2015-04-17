@@ -1,1 +1,16 @@
 \section{Conclusions and Future Works}
+
+The initial goal of REACH was to detect a specific grip type and perform an action as result. Although we were not able to implement it in an end-to-end manner, we believe that we have demonstrated the feasibility of such a system. It is impressive to see that the classification tree machine learning algorithm was able to accurately distinguish between 3 types of grip patterns.
+
+\par
+For future work, the following key areas were identified - 
+\begin{itemize}
+  \item From a hardware perspective, we would like to be able to shrink the entire setup into a case for the mobile device.
+  
+  \item Interface with the case over a Bluetooth connection to collect the force sensor data. This data would then dynamically be windowed, the features extracted and the model would make a prediction, all in real-time on the phone.
+  
+  \item Collect a larger training dataset with the grip gestures being performed by multiple users. Explore other features that could lead to better predictions.
+  
+  \item Create a user interaction scheme that dynamically responds to the grip gestures and evaluate its effectiveness.
+
+\end{itemize}
